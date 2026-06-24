@@ -8,7 +8,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 
 ## 디렉터리
 - `src/app/` — App Router 진입. 라우팅·레이아웃·메타.
-  - `layout.tsx` — 루트 레이아웃(폰트·전역 wrapper·메타·Vercel Analytics·SpeedInsights 주입).
+  - `layout.tsx` — 루트 레이아웃(폰트·전역 wrapper·메타).
   - `page.tsx` — 홈(포트폴리오 단일 페이지). 섹션 컴포넌트를 조립하고 푸터를 인라인 렌더.
   - `opengraph-image.tsx` — OG 이미지 생성.
   - `globals.css` — Tailwind 전역 스타일.
