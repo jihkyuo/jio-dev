@@ -22,8 +22,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - 코드베이스 지도 → `docs/architecture.md`
 - 결정 기록(ADR) → `docs/decisions/`
 - 기능 스펙 → `docs/specs/`
+- 컨벤션 → `docs/conventions/`
 
 ## 작업 흐름
 - 새 기능: `docs/specs/<feature>/`에 spec → plan → tasks 작성 후 구현.
 - 구조적 결정: `docs/decisions/`에 ADR(Nygard) 추가.
 - **문서 생략**: 카피 수정·스타일 조정·1파일 픽스·의존성 범프·자명한 버그픽스는 spec/ADR 없이 진행.
+
+## 커밋
+- 형식: `{이모지} type: 한국어 요약` (gitmoji + Conventional Commits)
+- 타입: ✨ feat / 🐛 fix / 🩹 patch / 📝 docs / 🔧 chore
+- 예: `✨ feat: 다크모드 토글 추가`
+- 상세·경계 → `docs/conventions/git-commits.md`
