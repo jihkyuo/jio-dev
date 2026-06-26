@@ -12,7 +12,7 @@ export function parseProjectFile(raw: string, file: string): ProjectMeta {
   const parsed = projectFrontmatterSchema.safeParse(data);
   if (!parsed.success) {
     throw new Error(
-      `[content] 잘못된 프로젝트 frontmatter: ${file}\n${parsed.error.message}`,
+      `[project] 잘못된 프로젝트 frontmatter: ${file}\n${parsed.error.message}`,
     );
   }
   return parsed.data;
@@ -44,11 +44,11 @@ export function getProjectBySlug(slug: string): ProjectMeta | undefined {
 export function getProjectContent(slug: string): { meta: ProjectMeta; content: string } {
   // public 서버 함수라 임의 입력 방어: 경로 트래버설 차단.
   if (slug.includes("/") || slug.includes("..")) {
-    throw new Error(`[content] 잘못된 slug: ${slug}`);
+    throw new Error(`[project] 잘못된 slug: ${slug}`);
   }
   const file = join(PROJECTS_DIR, `${slug}.mdx`);
   if (!existsSync(file)) {
-    throw new Error(`[content] 프로젝트를 찾을 수 없음: ${slug}`);
+    throw new Error(`[project] 프로젝트를 찾을 수 없음: ${slug}`);
   }
   const raw = readFileSync(file, "utf8");
   const { content } = matter(raw);
