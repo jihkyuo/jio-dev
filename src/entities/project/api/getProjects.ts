@@ -6,9 +6,8 @@ import { projectFrontmatterSchema, type ProjectMeta } from "../model/schema";
 
 const PROJECTS_DIR = join(process.cwd(), "content", "projects");
 
-/** frontmatter를 검증해 ProjectMeta로 변환. 실패 시 파일명을 담아 throw. */
-export function parseProjectFile(raw: string, file: string): ProjectMeta {
-  const { data } = matter(raw);
+/** 이미 파싱된 frontmatter data를 검증해 ProjectMeta로 변환. 실패 시 파일명을 담아 throw. */
+function validateFrontmatter(data: unknown, file: string): ProjectMeta {
   const parsed = projectFrontmatterSchema.safeParse(data);
   if (!parsed.success) {
     throw new Error(
@@ -16,6 +15,11 @@ export function parseProjectFile(raw: string, file: string): ProjectMeta {
     );
   }
   return parsed.data;
+}
+
+/** frontmatter를 검증해 ProjectMeta로 변환. 실패 시 파일명을 담아 throw. */
+export function parseProjectFile(raw: string, file: string): ProjectMeta {
+  return validateFrontmatter(matter(raw).data, file);
 }
 
 function loadAll(): ProjectMeta[] {
@@ -51,7 +55,7 @@ export function getProjectContent(slug: string): { meta: ProjectMeta; content: s
     throw new Error(`[project] 프로젝트를 찾을 수 없음: ${slug}`);
   }
   const raw = readFileSync(file, "utf8");
-  const { content } = matter(raw);
-  const meta = parseProjectFile(raw, `${slug}.mdx`);
+  const { data, content } = matter(raw); // 한 번만 파싱해 frontmatter·본문을 함께 추출
+  const meta = validateFrontmatter(data, `${slug}.mdx`);
   return { meta, content };
 }
