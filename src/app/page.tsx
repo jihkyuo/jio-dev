@@ -9,7 +9,7 @@ import { getProfile } from "@/content";
 export default function Home() {
   const p = getProfile();
   return (
-    <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
+    <div id="top" className="relative z-1 mx-auto grid w-full max-w-6xl grid-cols-1 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
       <Sidebar />
       <div className="flex min-w-0 flex-col">
         <main className="px-6 py-10 lg:px-14">
