@@ -58,3 +58,6 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 
 ## 설계 기록
 방향·IA·비주얼·구현 분할은 `docs/specs/portfolio/`(spec + plan-1/2/3)에 있다.
+
+> ⚠️ **현재 콘텐츠는 전부 목업 샘플이다.** 실제 내용 채우기는
+> `docs/specs/portfolio/content-handoff.md`(어디를 채울지·목업 경계·형식 규칙)를 먼저 읽는다.
