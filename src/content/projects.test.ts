@@ -40,4 +40,7 @@ describe("getProjectContent", () => {
   it("throws for an unknown slug", () => {
     expect(() => getProjectContent("nope")).toThrow("nope");
   });
+  it("rejects path-traversal slugs", () => {
+    expect(() => getProjectContent("../../etc/passwd")).toThrow("잘못된 slug");
+  });
 });

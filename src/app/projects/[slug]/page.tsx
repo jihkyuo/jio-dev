@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { getProjectSlugs, getProjectContent } from "@/content";
+import { getProjectSlugs, getProjectContent, type ProjectMeta } from "@/content";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -15,13 +15,13 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let data;
+  let data: { meta: ProjectMeta; content: string };
   try {
     data = getProjectContent(slug);
   } catch {
-    notFound();
+    return notFound();
   }
-  const { meta, content } = data!;
+  const { meta, content } = data;
   return (
     <main>
       <h1>{meta.title}</h1>

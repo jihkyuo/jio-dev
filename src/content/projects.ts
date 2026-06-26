@@ -41,6 +41,10 @@ export function getProjectBySlug(slug: string): ProjectMeta | undefined {
 }
 
 export function getProjectContent(slug: string): { meta: ProjectMeta; content: string } {
+  // public 서버 함수라 임의 입력 방어: 경로 트래버설 차단.
+  if (slug.includes("/") || slug.includes("..")) {
+    throw new Error(`[content] 잘못된 slug: ${slug}`);
+  }
   const file = join(PROJECTS_DIR, `${slug}.mdx`);
   if (!existsSync(file)) {
     throw new Error(`[content] 프로젝트를 찾을 수 없음: ${slug}`);
