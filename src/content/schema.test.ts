@@ -19,11 +19,25 @@ describe("experienceSchema", () => {
     expect(ok.success).toBe(true);
   });
 
-  it("rejects a malformed period and <2 impacts", () => {
+  it("rejects a malformed period (valid impact count)", () => {
     const bad = experienceSchema.safeParse({
       company: "某 핀테크",
       role: "프론트엔드 리드",
       period: { start: "2022", end: "NOW" },
+      teamSize: "5명",
+      scope: "리드",
+      impact: ["a", "b"],
+      leadership: [],
+      stack: ["Next.js"],
+    });
+    expect(bad.success).toBe(false);
+  });
+
+  it("rejects fewer than 2 impacts (valid period)", () => {
+    const bad = experienceSchema.safeParse({
+      company: "某 핀테크",
+      role: "프론트엔드 리드",
+      period: { start: "2022.01", end: "NOW" },
       teamSize: "5명",
       scope: "리드",
       impact: ["하나뿐"],
@@ -48,5 +62,35 @@ describe("projectFrontmatterSchema", () => {
       links: {},
     });
     expect(bad.success).toBe(false);
+  });
+
+  it("rejects a non-kebab-case slug", () => {
+    const bad = projectFrontmatterSchema.safeParse({
+      title: "결제 위젯 리아키텍처",
+      slug: "Bad_Slug",
+      period: "2024",
+      role: "프론트 리드",
+      teamSize: "5명",
+      stack: ["Next.js"],
+      impact: "번들 −38%",
+      summary: "요약",
+      links: {},
+    });
+    expect(bad.success).toBe(false);
+  });
+
+  it("accepts valid project frontmatter", () => {
+    const ok = projectFrontmatterSchema.safeParse({
+      title: "결제 위젯 리아키텍처",
+      slug: "valid-slug",
+      period: "2024",
+      role: "프론트 리드",
+      teamSize: "5명",
+      stack: ["Next.js"],
+      impact: "번들 −38%",
+      summary: "요약",
+      links: {},
+    });
+    expect(ok.success).toBe(true);
   });
 });
