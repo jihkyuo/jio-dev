@@ -3,6 +3,7 @@ import {
   getProjects,
   getProjectSlugs,
   parseProjectFile,
+  getProjectContent,
 } from "@/content/projects";
 
 describe("getProjects", () => {
@@ -26,5 +27,17 @@ describe("parseProjectFile", () => {
     const raw = `---\ntitle: 누락 테스트\n---\n본문`;
     // 빌드 로그가 actionable하도록 에러 메시지에 파일명이 포함되어야 한다.
     expect(() => parseProjectFile(raw, "broken.mdx")).toThrow("broken.mdx");
+  });
+});
+
+describe("getProjectContent", () => {
+  it("returns meta and raw mdx body for a known slug", () => {
+    const { meta, content } = getProjectContent("payment-widget-rearchitecture");
+    expect(meta.slug).toBe("payment-widget-rearchitecture");
+    expect(content).toContain("##"); // 본문 마크다운 존재
+    expect(content).not.toContain("---\ntitle"); // frontmatter는 제거됨
+  });
+  it("throws for an unknown slug", () => {
+    expect(() => getProjectContent("nope")).toThrow("nope");
   });
 });
