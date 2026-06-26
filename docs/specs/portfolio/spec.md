@@ -35,6 +35,9 @@
 > nav: About · Experience · Projects · Contact + **이력서 PDF**(상단 고정 접근).
 
 ### 프로젝트 상세 — `/projects/[slug]` (MDX), Outcome-First
+
+> ⚠️ **이 섹션의 케이스 스터디 골격은 [`case-study-structure.md`](./case-study-structure.md)로 대체(supersede)됨.** 상세 글은 그 문서의 5층 골격(헤드라인 블록 → 요약 표(PAAR) → 핵심 원인 콜아웃 → 본문(지배 질문) → 딥다이브)을 따른다. 아래 0~6 골격은 초기 안으로, 더 이상 정본이 아니다.
+
 0. **요약 스트립(TL;DR)** — 정량 임팩트 1줄 + 역할/기간/팀규모/스택/링크. (5초 파악)
 1. **맥락 & 문제** — 비즈니스/사용자/시스템 제약. 2~3문장 압축.
 2. **My Role & Scope** — 내가 오너십 가진 영역, 주도한 의사결정, 협업 경계(혼자/리드/기여). 시니어 핵심.
