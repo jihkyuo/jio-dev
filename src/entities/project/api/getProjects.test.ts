@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 import {
   getProjects,
   getProjectSlugs,
@@ -6,19 +8,29 @@ import {
   getProjectContent,
 } from "./getProjects";
 
+// 콘텐츠 디렉터리에서 기대 slug를 직접 도출 — 특정 프로젝트명을 하드코딩하지 않아
+// 샘플을 추가/이름변경해도 깨지지 않으면서 "파일 ↔ 로더" 정합을 검증한다.
+const slugsFromDisk = readdirSync(join(process.cwd(), "content", "projects"))
+  .filter((f) => f.endsWith(".mdx"))
+  .map((f) => f.replace(/\.mdx$/, ""))
+  .sort();
+
 describe("getProjects", () => {
-  it("loads sample projects sorted by order", () => {
-    const ps = getProjects();
-    expect(ps.length).toBeGreaterThanOrEqual(2);
-    expect(ps[0].slug).toBe("payment-widget-rearchitecture");
-    const orders = ps.map((p) => p.order ?? Number.MAX_SAFE_INTEGER);
+  it("loads every project file on disk", () => {
+    expect(getProjects().length).toBe(slugsFromDisk.length);
+  });
+
+  it("is sorted by order (ascending)", () => {
+    const orders = getProjects().map((p) => p.order ?? Number.MAX_SAFE_INTEGER);
     for (let i = 1; i < orders.length; i++) {
       expect(orders[i - 1] <= orders[i]).toBe(true);
     }
   });
 
-  it("exposes slugs", () => {
-    expect(getProjectSlugs()).toContain("design-system-v2");
+  it("exposes a unique slug per content file", () => {
+    const slugs = getProjectSlugs();
+    expect([...slugs].sort()).toEqual(slugsFromDisk); // slug == 파일명
+    expect(new Set(slugs).size).toBe(slugs.length); // 유일성
   });
 });
 
@@ -31,11 +43,13 @@ describe("parseProjectFile", () => {
 });
 
 describe("getProjectContent", () => {
-  it("returns meta and raw mdx body for a known slug", () => {
-    const { meta, content } = getProjectContent("payment-widget-rearchitecture");
-    expect(meta.slug).toBe("payment-widget-rearchitecture");
-    expect(content).toContain("##"); // 본문 마크다운 존재
-    expect(content).not.toContain("---\ntitle"); // frontmatter는 제거됨
+  it("round-trips meta and body for every discovered slug", () => {
+    for (const slug of slugsFromDisk) {
+      const { meta, content } = getProjectContent(slug);
+      expect(meta.slug).toBe(slug);
+      expect(content.length).toBeGreaterThan(0);
+      expect(content).not.toContain("---\ntitle"); // frontmatter는 제거됨
+    }
   });
   it("throws for an unknown slug", () => {
     expect(() => getProjectContent("nope")).toThrow("nope");
