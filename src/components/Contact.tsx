@@ -4,9 +4,9 @@ export function Contact() {
   const profile = getProfile();
   return (
     <section id="contact" className="scroll-mt-24">
-      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      <h2 className="font-mono text-xs uppercase tracking-widest text-accent">
         Contact
-      </p>
+      </h2>
       <hr className="mt-2 mb-8 border-line" />
       {/* 사용자가 실제 연락 안내로 교체 */}
       <p className="mb-8 text-body leading-relaxed">

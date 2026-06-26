@@ -3,6 +3,7 @@ import { Geist_Mono, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/config/site";
+import { CursorGlow } from "@/components/CursorGlow";
 import "./globals.css";
 
 // next/font 가 빌드 시점에 폰트를 내려받아 셀프호스팅한다 (외부 요청 없음).
@@ -54,6 +55,7 @@ export default function RootLayout({
       className={`${notoSansKR.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <body className="relative z-0 min-h-full flex flex-col">
+        <CursorGlow />
         <div className="relative z-[1]">
           {children}
         </div>

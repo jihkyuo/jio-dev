@@ -17,15 +17,15 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#0a0a0a",
-          color: "#ededed",
+          background: "#101216",
+          color: "#f1f3f6",
         }}
       >
-        <div style={{ fontSize: 32, color: "#888888" }}>{siteConfig.role}</div>
+        <div style={{ fontSize: 32, color: "#7e8593" }}>{siteConfig.role}</div>
         <div style={{ marginTop: 24, fontSize: 88, fontWeight: 700 }}>
           {siteConfig.name}
         </div>
-        <div style={{ marginTop: 32, fontSize: 36, color: "#bbbbbb" }}>
+        <div style={{ marginTop: 32, fontSize: 36, color: "#aab1bd" }}>
           {siteConfig.url.replace("https://", "")}
         </div>
       </div>

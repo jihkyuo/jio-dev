@@ -5,9 +5,9 @@ export function Projects() {
   const projects = getProjects();
   return (
     <section id="projects" className="scroll-mt-24 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      <h2 className="font-mono text-xs uppercase tracking-widest text-accent">
         Selected Projects
-      </p>
+      </h2>
       <hr className="mt-2 mb-8 border-line" />
       <div className="space-y-4">
         {projects.map((p) => (
