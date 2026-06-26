@@ -20,7 +20,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 - `layout.tsx` — 루트 레이아웃(폰트·다크 고정·그레인 위 콘텐츠 래퍼·`<CursorGlow/>`·Analytics).
 - `page.tsx` — 홈. 2단 그리드(좌 `Sidebar` + 우 섹션들), 우측 섹션을 `<Reveal>`로 감싸 스크롤 등장.
 - `projects/[slug]/page.tsx` — 프로젝트 상세(MDX). `generateStaticParams`·`dynamicParams=false`·`generateMetadata`, TL;DR 스트립 + `<MDXRemote>` 본문.
-- `sitemap.ts` / `smoke.test.ts` / `sitemap.test.ts` — 사이트맵 생성 + 테스트.
+- `sitemap.ts` / `sitemap.test.ts` — 사이트맵 생성 + 테스트.
 - `opengraph-image.tsx` — OG 이미지(Grain·Steel 색).
 - `globals.css` — 토큰·그레인·`.rail-grid`·focus-visible·reduced-motion·print·forced-colors·no-JS 폴백.
 
