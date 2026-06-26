@@ -25,6 +25,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - 결정 기록(ADR) → `docs/decisions/`
 - 기능 스펙 → `docs/specs/`
 - 컨벤션 → `docs/conventions/`
+- **포트폴리오 콘텐츠 작성·이식** → `docs/specs/portfolio/content-migration.md`(진입: 어디서 어떻게 옮기나) → `docs/specs/portfolio/case-study-structure.md`(글 골격: 어떻게 쓰나)
 
 ## 작업 흐름
 - 새 기능: `docs/specs/<feature>/`에 spec → plan → tasks 작성 후 구현.
