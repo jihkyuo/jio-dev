@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist_Mono, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { siteConfig } from "@/config/site";
-import { CursorGlow } from "@/components/CursorGlow";
+import { siteConfig } from "@/shared/config";
+import { CursorGlow } from "@/shared/ui/CursorGlow";
 import "./globals.css";
 
 // next/font 가 빌드 시점에 폰트를 내려받아 셀프호스팅한다 (외부 요청 없음).

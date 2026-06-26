@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/shared/config";
 import { profileSchema, type Profile } from "@/content/schema";
 
 /**

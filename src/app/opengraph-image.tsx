@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/shared/config";
 
 // 동적 OG 카드 — next/og(=@vercel/og) 로 SNS 공유 썸네일을 빌드/요청 시 생성한다.
 export const alt = `${siteConfig.name} · ${siteConfig.role}`;
