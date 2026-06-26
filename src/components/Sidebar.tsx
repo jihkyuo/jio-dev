@@ -16,7 +16,7 @@ export function Sidebar() {
   const snapshot = `${p.snapshot.years}년차 · ${p.snapshot.domains.join(" · ")}`;
 
   return (
-    <header className="rail-grid flex flex-col justify-between border-b border-line px-6 py-12 lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r lg:px-10 lg:py-16">
+    <header className="rail-grid flex flex-col justify-between border-b border-line px-6 py-12 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-b-0 lg:border-r lg:px-10 lg:py-16">
       <div>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
           {p.eyebrow}

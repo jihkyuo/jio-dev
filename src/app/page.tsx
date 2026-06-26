@@ -13,6 +13,10 @@ export default function Home() {
       <Sidebar />
       <div className="flex min-w-0 flex-col">
         <main className="px-6 py-10 lg:px-14">
+          {/* 우측 컬럼 최상단 lead — 5초 스캔용 대표 성과 한 줄 */}
+          <p className="pt-6 font-mono text-sm leading-relaxed text-accent">
+            {p.snapshot.headline}
+          </p>
           <About />
           <Experience />
           <Projects />
