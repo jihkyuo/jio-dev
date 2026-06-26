@@ -24,6 +24,7 @@ describe("getProjects", () => {
 describe("parseProjectFile", () => {
   it("throws when required frontmatter is missing", () => {
     const raw = `---\ntitle: 누락 테스트\n---\n본문`;
-    expect(() => parseProjectFile(raw, "broken.mdx")).toThrow();
+    // 빌드 로그가 actionable하도록 에러 메시지에 파일명이 포함되어야 한다.
+    expect(() => parseProjectFile(raw, "broken.mdx")).toThrow("broken.mdx");
   });
 });
