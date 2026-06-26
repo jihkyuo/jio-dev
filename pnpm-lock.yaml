@@ -39,6 +39,9 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
+      '@feature-sliced/steiger-plugin':
+        specifier: ^0.6.0
+        version: 0.6.0(typescript@5.9.3)
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.3.1
