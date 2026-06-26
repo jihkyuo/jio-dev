@@ -1,11 +1,5 @@
 import { getProfile } from "@/content";
-
-const NAV = [
-  { href: "#about", label: "About", n: "01" },
-  { href: "#experience", label: "Experience", n: "02" },
-  { href: "#projects", label: "Projects", n: "03" },
-  { href: "#contact", label: "Contact", n: "04" },
-];
+import { RailNav } from "./RailNav";
 
 /**
  * 좌측 고정 레일(Blueprint). 도트 그리드 배경 + 틱 번호 nav로 흔한
@@ -30,21 +24,7 @@ export function Sidebar() {
         </p>
         <p className="mt-3 font-mono text-xs text-muted">{snapshot}</p>
 
-        <nav className="mt-10 max-w-xs">
-          <ul className="font-mono text-sm">
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="flex items-center justify-between border-t border-line py-3 text-muted transition-colors hover:text-head"
-                >
-                  <span>{item.label}</span>
-                  <span className="text-xs text-accent/70">{item.n}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <RailNav />
       </div>
 
       <div className="mt-10">
