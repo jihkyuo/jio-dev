@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #101216;
+  --head: #f1f3f6;
+  --body: #aab1bd;
+  --muted: #7e8593;
+  --accent: #7e9cd4;
+  --card: #15181e;
+  --line: #1e222a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-head: var(--head);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-line: var(--line);
   --font-sans: var(--font-noto-kr);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  position: relative;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+/* 정적 미세 그레인 오버레이 (인터랙티브 커서 글로우는 Plan 3) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Blueprint 좌측 레일의 옅은 도트 그리드 (양산 사이드바 탈피용 텍스처) */
+.rail-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--accent) 14%, transparent) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 18px 18px;
 }

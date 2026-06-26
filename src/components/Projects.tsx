@@ -1,51 +1,31 @@
-import { projects } from "@/data/projects";
+import Link from "next/link";
+import { getProjects } from "@/content";
 
 export function Projects() {
+  const projects = getProjects();
   return (
-    <section id="projects" className="scroll-mt-20">
-      <h2 className="text-2xl font-semibold tracking-tight">프로젝트</h2>
-      <ul className="mt-8 flex flex-col gap-6">
-        {projects.map((project) => {
-          const card = (
-            <article className="rounded-xl border border-black/10 p-6 transition-colors hover:border-black/25 dark:border-white/10 dark:hover:border-white/25">
+    <section id="projects" className="scroll-mt-24 py-16">
+      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+        Selected Projects
+      </p>
+      <hr className="mt-2 mb-8 border-line" />
+      <div className="space-y-4">
+        {projects.map((p) => (
+          <Link key={p.slug} href={`/projects/${p.slug}`} className="block">
+            <article className="bg-card border border-line rounded-xl p-5 transition-colors hover:border-accent/50">
               <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg font-medium">{project.title}</h3>
-                <span className="shrink-0 font-mono text-sm text-foreground/50">
-                  {project.period}
+                <h3 className="text-base font-semibold text-head">{p.title}</h3>
+                <span className="shrink-0 font-mono text-xs text-muted">
+                  {p.period}
                 </span>
               </div>
-              <p className="mt-2 text-foreground/75">{project.summary}</p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-full bg-foreground/5 px-3 py-1 font-mono text-xs text-foreground/70"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-2 font-mono text-sm text-accent">{p.impact}</p>
+              <p className="mt-2 text-sm text-body">{p.summary}</p>
+              <span className="mt-3 block text-sm text-accent">↗</span>
             </article>
-          );
-
-          return (
-            <li key={project.slug}>
-              {project.href ? (
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block"
-                >
-                  {card}
-                </a>
-              ) : (
-                card
-              )}
-            </li>
-          );
-        })}
-      </ul>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
