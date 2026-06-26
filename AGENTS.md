@@ -11,7 +11,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 항시 룰
 - **Next.js**: 코드 작성 전 `node_modules/next/dist/docs/`의 관련 가이드를 읽는다(위 마커 블록).
 - **패키지 매니저**: pnpm. npm/yarn 쓰지 않는다.
-- **배포**: Vercel(`@vercel/analytics`·`@vercel/speed-insights` 사용). git 푸시 시 자동 배포.
+- **배포**: Vercel(`@vercel/analytics`·`@vercel/speed-insights` 사용). **자동 배포 미설정**(GitHub↔Vercel Git 연동 후속 예정).
 
 ## 명령어
 - `pnpm install` — 의존성 설치
