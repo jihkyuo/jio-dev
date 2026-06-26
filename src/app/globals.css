@@ -48,3 +48,28 @@ body::before {
   );
   background-size: 18px 18px;
 }
+
+/* 키보드 포커스 가시화 */
+:where(a, button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 모션 최소화 — 모든 트랜지션/애니메이션 무력화 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 인쇄/이력서 공유 — 다크·그레인·글로우 제거, 잉크 절약 */
+@media print {
+  body { background: #fff; color: #111; }
+  body::before { display: none; }       /* 그레인 */
+  .rail-grid { background-image: none; }
+  .no-print { display: none !important; }
+}

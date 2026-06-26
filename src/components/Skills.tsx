@@ -11,9 +11,9 @@ export function Skills() {
   const skills = getSkills();
   return (
     <section id="skills" className="scroll-mt-24 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      <h2 className="font-mono text-xs uppercase tracking-widest text-accent">
         Stack
-      </p>
+      </h2>
       <hr className="mt-2 mb-8 border-line" />
       <div className="space-y-6">
         {GROUPS.map(({ label, key }) => (

@@ -4,9 +4,9 @@ export function Experience() {
   const entries = getExperience();
   return (
     <section id="experience" className="scroll-mt-24 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      <h2 className="font-mono text-xs uppercase tracking-widest text-accent">
         Experience
-      </p>
+      </h2>
       <hr className="mt-2 mb-8 border-line" />
       <div className="space-y-12">
         {entries.map((e) => (

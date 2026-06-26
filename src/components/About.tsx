@@ -1,9 +1,9 @@
 export function About() {
   return (
     <section id="about" className="scroll-mt-24 py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-accent">
+      <h2 className="font-mono text-xs uppercase tracking-widest text-accent">
         About
-      </p>
+      </h2>
       <hr className="mt-2 mb-8 border-line" />
       {/* 사용자가 실제 소개로 교체 */}
       <div className="space-y-4 text-body leading-relaxed">

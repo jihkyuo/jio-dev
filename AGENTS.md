@@ -11,12 +11,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## 항시 룰
 - **Next.js**: 코드 작성 전 `node_modules/next/dist/docs/`의 관련 가이드를 읽는다(위 마커 블록).
 - **패키지 매니저**: pnpm. npm/yarn 쓰지 않는다.
+- **배포**: Vercel(`@vercel/analytics`·`@vercel/speed-insights` 사용). git 푸시 시 자동 배포.
 
 ## 명령어
 - `pnpm install` — 의존성 설치
 - `pnpm dev` — 개발 서버
 - `pnpm lint` — ESLint
 - `pnpm build` — 프로덕션 빌드
+- `pnpm start` — 프로덕션 서버(빌드 후 실행)
 
 ## 문서 인덱스 (필요할 때 읽기)
 - 코드베이스 지도 → `docs/architecture.md`
