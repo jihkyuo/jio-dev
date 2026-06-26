@@ -12,7 +12,8 @@ export function CursorGlow() {
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const okMotion = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
-    if (!fine || !okMotion) return;
+    const forced = window.matchMedia("(forced-colors: active)").matches;
+    if (!fine || !okMotion || forced) return;
 
     const el = ref.current;
     if (!el) return;

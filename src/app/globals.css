@@ -72,4 +72,15 @@ body::before {
   body::before { display: none; }       /* 그레인 */
   .rail-grid { background-image: none; }
   .no-print { display: none !important; }
+  .reveal-section { opacity: 1 !important; transform: none !important; }
+}
+
+/* JS 비활성 시 reveal로 숨겨진 콘텐츠가 영구히 사라지지 않게(폴백) */
+@media (scripting: none) {
+  .reveal-section { opacity: 1 !important; transform: none !important; }
+}
+
+/* 고대비(Windows High Contrast 등): 콘텐츠 가시성 보장, 글로우 무력화 */
+@media (forced-colors: active) {
+  .reveal-section { opacity: 1 !important; transform: none !important; }
 }
