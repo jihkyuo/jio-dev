@@ -1,9 +1,9 @@
-import { Sidebar } from "@/components/Sidebar";
-import { About } from "@/components/About";
-import { Experience } from "@/components/Experience";
-import { Skills } from "@/components/Skills";
-import { Projects } from "@/components/Projects";
-import { Contact } from "@/components/Contact";
+import { Sidebar } from "@/widgets/sidebar";
+import { About } from "@/widgets/about";
+import { Experience } from "@/widgets/experience";
+import { Skills } from "@/widgets/skills";
+import { Projects } from "@/widgets/projects";
+import { Contact } from "@/widgets/contact";
 import { Reveal } from "@/shared/ui/Reveal";
 import { getProfile } from "@/entities/profile";
 
