@@ -43,3 +43,6 @@ next-env.d.ts
 
 # superpowers brainstorm sessions
 .superpowers/
+
+# codex CLI 세션 아티팩트
+.context/
