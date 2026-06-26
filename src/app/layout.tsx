@@ -51,10 +51,12 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${notoSansKR.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${notoSansKR.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">
-        {children}
+      <body className="relative z-0 min-h-full flex flex-col">
+        <div className="relative z-[1]">
+          {children}
+        </div>
         <Analytics />
         <SpeedInsights />
       </body>
