@@ -16,10 +16,12 @@ pnpm build
 ```
 
 ## 구조
-- `src/app/` — App Router(레이아웃·페이지·OG 이미지)
-- `src/components/` — 섹션 UI(About / Projects / Contact / SiteHeader)
+2단 Blueprint 레이아웃(좌측 고정 레일 + 우측 스크롤) · Grain·Steel 다크 톤.
+- `src/content/` — 타입 안전 콘텐츠 레이어(zod 검증). 프로필·경력·스킬·프로젝트 로더 + `@/content` 배럴
+- `content/projects/*.mdx` — 프로젝트 상세 본문 + frontmatter
+- `src/app/` — App Router(홈 2단·`/projects/[slug]` MDX 상세·sitemap·OG)
+- `src/components/` — 서버 섹션(Sidebar/About/Experience/Skills/Projects/Contact) + 클라이언트 인터랙션(CursorGlow/Reveal/RailNav)
 - `src/config/site.ts` — 사이트 메타
-- `src/data/projects.ts` — 프로젝트 데이터
 - 자세한 지도: [docs/architecture.md](docs/architecture.md)
 
 ## AI 하네스
