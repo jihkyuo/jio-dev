@@ -4,7 +4,7 @@ import {
   getProjectSlugs,
   parseProjectFile,
   getProjectContent,
-} from "@/content/projects";
+} from "./getProjects";
 
 describe("getProjects", () => {
   it("loads sample projects sorted by order", () => {

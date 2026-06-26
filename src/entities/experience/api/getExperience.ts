@@ -1,4 +1,4 @@
-import { experienceSchema, type Experience } from "@/content/schema";
+import { experienceSchema, type Experience } from "../model/schema";
 
 /** 실제 경력으로 교체할 것. 최신순 정렬은 getExperience가 보장한다. */
 const raw: Experience[] = [

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getSkills } from "@/content/skills";
+import { getSkills } from "./getSkills";
 
 describe("getSkills", () => {
   it("returns grouped skills with a non-empty core", () => {

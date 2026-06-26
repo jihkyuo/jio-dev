@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { getProjectSlugs, getProjectContent, getProjectBySlug, type ProjectMeta } from "@/content";
+import { getProjectSlugs, getProjectContent, getProjectBySlug, type ProjectMeta } from "@/entities/project";
 import { mdxComponents } from "@/shared/ui/mdx";
 
 export function generateStaticParams() {

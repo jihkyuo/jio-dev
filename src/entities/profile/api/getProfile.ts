@@ -1,5 +1,5 @@
 import { siteConfig } from "@/shared/config";
-import { profileSchema, type Profile } from "@/content/schema";
+import { profileSchema, type Profile } from "../model/schema";
 
 /**
  * Hero/Contact용 프로필. 이름·링크는 siteConfig(메타데이터 단일 출처)를 재사용하고,

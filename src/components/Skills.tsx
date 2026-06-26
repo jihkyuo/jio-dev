@@ -1,4 +1,4 @@
-import { getSkills } from "@/content";
+import { getSkills } from "@/entities/skills";
 
 const GROUPS: { label: string; key: "core" | "comfortable" | "production" }[] =
   [

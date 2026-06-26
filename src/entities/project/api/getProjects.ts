@@ -1,7 +1,8 @@
+import "server-only";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
-import { projectFrontmatterSchema, type ProjectMeta } from "@/content/schema";
+import { projectFrontmatterSchema, type ProjectMeta } from "../model/schema";
 
 const PROJECTS_DIR = join(process.cwd(), "content", "projects");
 

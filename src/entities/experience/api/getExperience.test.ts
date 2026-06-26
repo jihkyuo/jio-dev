@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getExperience } from "@/content/experience";
+import { getExperience } from "./getExperience";
 
 describe("getExperience", () => {
   it("returns schema-valid entries sorted most-recent first", () => {

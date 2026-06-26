@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/shared/config";
-import { getProjectSlugs } from "@/content";
+import { getProjectSlugs } from "@/entities/project";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, "");

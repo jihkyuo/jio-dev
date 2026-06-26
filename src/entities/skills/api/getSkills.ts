@@ -1,4 +1,4 @@
-import { skillsSchema, type Skills } from "@/content/schema";
+import { skillsSchema, type Skills } from "../model/schema";
 
 const skills: Skills = skillsSchema.parse({
   core: ["React", "Next.js", "TypeScript"],

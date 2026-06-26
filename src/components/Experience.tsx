@@ -1,4 +1,4 @@
-import { getExperience } from "@/content";
+import { getExperience } from "@/entities/experience";
 
 export function Experience() {
   const entries = getExperience();

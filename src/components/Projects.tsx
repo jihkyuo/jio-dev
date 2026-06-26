@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProjects } from "@/content";
+import { getProjects } from "@/entities/project";
 
 export function Projects() {
   const projects = getProjects();

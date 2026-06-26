@@ -1,4 +1,4 @@
-import { getProfile } from "@/content";
+import { getProfile } from "@/entities/profile";
 
 export function Contact() {
   const profile = getProfile();

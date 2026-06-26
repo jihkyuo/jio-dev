@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getProfile } from "@/content/profile";
+import { getProfile } from "./getProfile";
 
 describe("getProfile", () => {
   it("returns a schema-valid profile with a resume PDF and snapshot", () => {

@@ -5,7 +5,7 @@ import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { Reveal } from "@/shared/ui/Reveal";
-import { getProfile } from "@/content";
+import { getProfile } from "@/entities/profile";
 
 export default function Home() {
   const p = getProfile();
