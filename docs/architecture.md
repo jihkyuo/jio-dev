@@ -14,50 +14,66 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 
 ## 디렉터리
 
-### `src/content/` — 타입 안전 콘텐츠 레이어(단일 출처)
-- `schema.ts` — zod 스키마 + 추론 타입(`Profile`·`Experience`·`Skills`·`ProjectMeta`). 모든 콘텐츠는 로드 시 `.parse`로 검증(잘못되면 빌드 실패).
-- `profile.ts` — Hero/사이드바용 프로필(`getProfile`). 이름·링크는 `@/config/site` 재사용.
-- `experience.ts` — 경력 타임라인(`getExperience`, 최신순 정렬).
-- `skills.ts` — 스킬 분류(`getSkills`: Core/Comfortable/Production).
-- `projects.ts` — 프로젝트 로더: `getProjects`·`getProjectSlugs`·`getProjectBySlug`·`getProjectContent`. `content/projects/*.mdx`의 frontmatter를 gray-matter로 읽고 zod로 검증, 본문 문자열 반환. slug 경로 트래버설 가드.
-- `index.ts` — 콘텐츠 API 배럴. **컴포넌트는 항상 `@/content`를 통해 데이터를 읽는다.**
-- `content/projects/*.mdx` (저장소 루트) — 프로젝트 상세 본문 + frontmatter(title·slug·period·role·teamSize·stack·impact·summary·links·order).
+구조는 **Feature-Sliced Design(FSD)** 5레이어를 따른다. 레이어 간 의존 방향은 `app → widgets → entities → shared`(하향만, 가로 import 0). 경계는 **steiger**(`pnpm lint:fsd`)가 강제한다.
 
 ### `src/app/` — App Router(라우팅·레이아웃·메타)
 - `layout.tsx` — 루트 레이아웃(폰트·다크 고정·그레인 위 콘텐츠 래퍼·`<CursorGlow/>`·Analytics).
 - `page.tsx` — 홈. 2단 그리드(좌 `Sidebar` + 우 섹션들), 우측 섹션을 `<Reveal>`로 감싸 스크롤 등장.
 - `projects/[slug]/page.tsx` — 프로젝트 상세(MDX). `generateStaticParams`·`dynamicParams=false`·`generateMetadata`, TL;DR 스트립 + `<MDXRemote>` 본문.
-- `sitemap.ts` — 홈 + 모든 프로젝트 상세 URL.
+- `sitemap.ts` / `smoke.test.ts` / `sitemap.test.ts` — 사이트맵 생성 + 테스트.
 - `opengraph-image.tsx` — OG 이미지(Grain·Steel 색).
 - `globals.css` — 토큰·그레인·`.rail-grid`·focus-visible·reduced-motion·print·forced-colors·no-JS 폴백.
 
-### `src/components/` — UI
-- **서버 섹션**: `Sidebar`(좌측 레일, `RailNav` 포함) · `About` · `Experience` · `Skills` · `Projects`(상세 링크) · `Contact`.
-- **클라이언트 인터랙션 islands**(`"use client"`): `CursorGlow`(커서 추적 광원) · `Reveal`(스크롤 등장) · `RailNav`(nav 스크롤 스파이 활성 인디케이터).
-- `mdx.tsx` — 프로젝트 MDX 본문의 요소 매핑(토큰 스타일 h2/h3/p/ul/li/a/code/pre).
+### `src/widgets/` — 페이지 섹션(entity를 읽어 렌더)
+각 슬라이스는 `ui/` + `index.ts`(public API). 슬라이스 내부 컴포넌트는 외부에 노출하지 않는다.
+- `sidebar/` — `ui/Sidebar.tsx` + `ui/RailNav.tsx`(슬라이스 비공개, nav 스크롤 스파이).
+- `about/` — `ui/About.tsx`.
+- `experience/` — `ui/Experience.tsx`.
+- `skills/` — `ui/Skills.tsx`.
+- `projects/` — `ui/Projects.tsx`.
+- `contact/` — `ui/Contact.tsx`.
 
-### 기타
-- `src/config/site.ts` — 사이트 메타(제목·설명·링크) 단일 소스(OG·메타데이터·프로필 링크가 참조).
+### `src/features/` — 빈 레이어(`.gitkeep`)
+현재 사용자 유스케이스(상태 변경·인터랙션 비즈니스 로직)가 0개인 정적 사이트. 다크모드 토글·연락 폼 등 실제 feature가 생기면 채운다.
+
+### `src/entities/` — 도메인 모델 + 데이터 API
+각 슬라이스: `model/schema.ts`(zod 스키마 + 추론 타입) + `api/get*.ts`(+test) + `index.ts`(public API). fs 기반 API에는 `import "server-only"` 명시(빌드타임 클라이언트 혼입 방지).
+- `profile/` — `Profile` 타입, `getProfile`.
+- `experience/` — `Experience` 타입, `getExperience`(최신순).
+- `skill/` — `Skills` 타입, `getSkills`(Core/Comfortable/Production). *(슬라이스명 singular — steiger `inconsistent-naming` 규칙; 사용자 승인)*
+- `project/` — `ProjectMeta` 타입, `getProjects`·`getProjectSlugs`·`getProjectBySlug`·`getProjectContent`. slug 경로 트래버설 가드 포함.
+
+### `src/shared/` — 도메인 무관 재사용
+- `ui/` — `CursorGlow.tsx`(커서 광원, `"use client"`) · `Reveal.tsx`(스크롤 등장, `"use client"`) · `mdx.tsx`(MDX 요소 매핑). **통배럴 없음 — 직접 경로로 import**(`@/shared/ui/CursorGlow` 등). RSC/클라이언트 경계 혼입 방지.
+- `config/` — `site.ts`(사이트 메타 단일 소스: 제목·설명·링크) + `index.ts`.
+
+### `src/__mocks__/` — 테스트 전용
+- `server-only.ts` — vitest 환경에서 `"server-only"` 패키지 모킹.
+
+### `content/projects/*.mdx` (저장소 루트)
+프로젝트 상세 본문 + frontmatter(title·slug·period·role·teamSize·stack·impact·summary·links·order). `entities/project`가 읽어 검증.
 
 ## 데이터 흐름
-`content/projects/*.mdx` + `src/content/*.ts`(zod 검증) + `src/config/site.ts`
-→ `src/content/index.ts`(배럴)
-→ `src/components/*`(서버 렌더) + 클라이언트 islands(인터랙션)
+`content/projects/*.mdx` + `src/entities/*/api/*.ts`(zod 검증)
+→ `src/widgets/*`(서버 렌더) + 클라이언트 islands(`shared/ui/`)
 → `src/app/page.tsx`·`projects/[slug]/page.tsx`(조립·라우팅) → 렌더.
 
 ## 어디를 바꾸나
-- 프로필·경력·스킬 → `src/content/{profile,experience,skills}.ts`.
+- 프로필 → `src/entities/profile/api/getProfile.ts`.
+- 경력 → `src/entities/experience/api/getExperience.ts`.
+- 스킬 → `src/entities/skill/api/getSkills.ts`.
 - 프로젝트 추가 → `content/projects/<slug>.mdx`(frontmatter + 본문) 한 개 추가.
-- 콘텐츠 스키마/필수 필드 → `src/content/schema.ts`.
-- 사이트 제목·설명·링크 → `src/config/site.ts`.
-- 섹션 디자인 → 해당 `src/components/*.tsx`.
+- 콘텐츠 스키마/필수 필드 → 해당 `src/entities/*/model/schema.ts`.
+- 사이트 제목·설명·링크 → `src/shared/config/site.ts`.
+- 섹션 디자인 → 해당 `src/widgets/<slice>/ui/*.tsx`.
 - 디자인 토큰·전역 효과(그레인·접근성·print) → `src/app/globals.css`.
-- 인터랙션 동작 → `src/components/{CursorGlow,Reveal,RailNav}.tsx`.
+- 인터랙션 동작 → `src/shared/ui/{CursorGlow,Reveal}.tsx` / `src/widgets/sidebar/ui/RailNav.tsx`.
 - 페이지 구성(섹션 순서·2단 배치) → `src/app/page.tsx`.
 - 상세 페이지 레이아웃/메타 → `src/app/projects/[slug]/page.tsx`.
 
 ## 설계 기록
-방향·IA·비주얼·구현 분할은 `docs/specs/portfolio/`(spec + plan-1/2/3)에 있다.
+FSD 마이그레이션 설계 → `docs/superpowers/specs/2026-06-26-fsd-migration-design.md`.
+방향·IA·비주얼·구현 분할 → `docs/specs/portfolio/`(spec + plan-1/2/3).
 
 > ⚠️ **현재 콘텐츠는 전부 목업 샘플이다.** 실제 내용 채우기는
 > `docs/specs/portfolio/content-handoff.md`(어디를 채울지·목업 경계·형식 규칙)를 먼저 읽는다.

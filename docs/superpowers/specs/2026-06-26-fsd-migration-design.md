@@ -1,6 +1,6 @@
 # FSD 마이그레이션 설계
 
-> 상태: 설계 확정(브레인스토밍 + codex 교차검증 완료) · 다음: 구현 계획(writing-plans)
+> 상태: 구현 완료
 > 날짜: 2026-06-26
 
 ## 목표
@@ -54,13 +54,15 @@ src/
   entities/                         # 도메인 모델 + 데이터 API
     profile/     model/schema.ts  api/getProfile.ts(+test)         index.ts
     experience/  model/schema.ts  api/getExperience.ts(+test)      index.ts
-    skills/      model/schema.ts  api/getSkills.ts(+test)          index.ts
+    skill/       model/schema.ts  api/getSkills.ts(+test)          index.ts
     project/     model/schema.ts  api/getProjects.ts(+test)        index.ts
 
   shared/
     ui/      CursorGlow.tsx  Reveal.tsx  mdx.tsx     # 통배럴 없음 — 직접 경로 import
     config/  site.ts  index.ts
 ```
+
+> **네이밍 결정 (구현 중 변경):** 설계 스펙 초안은 `entities/skills`(복수)로 작성했으나, steiger `fsd/inconsistent-naming` 규칙이 엔티티 슬라이스 이름의 문법 수를 일관되게 요구하므로(profile/experience/project가 단수) `entities/skill`(단수)로 변경했다 — 사용자 승인 완료.
 
 ## 핵심 이동 매핑
 
