@@ -1,5 +1,4 @@
-import { SiteHeader } from "@/components/SiteHeader";
-import { Hero } from "@/components/Hero";
+import { Sidebar } from "@/components/Sidebar";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { Skills } from "@/components/Skills";
@@ -10,19 +9,22 @@ import { getProfile } from "@/content";
 export default function Home() {
   const p = getProfile();
   return (
-    <>
-      <SiteHeader />
-      <main id="top" className="relative z-[1] mx-auto flex w-full max-w-2xl flex-1 flex-col gap-20 px-6 py-16">
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
-      <footer className="relative z-[1] border-t border-line">
-        <div className="mx-auto max-w-2xl px-6 py-8 font-mono text-xs text-muted">© {new Date().getFullYear()} {p.name}</div>
-      </footer>
-    </>
+    <div className="relative z-[1] mx-auto grid w-full max-w-6xl grid-cols-1 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
+      <Sidebar />
+      <div className="flex min-w-0 flex-col">
+        <main className="px-6 py-10 lg:px-14">
+          <About />
+          <Experience />
+          <Projects />
+          <Skills />
+          <Contact />
+        </main>
+        <footer className="border-t border-line px-6 py-8 lg:px-14">
+          <p className="font-mono text-xs text-muted">
+            © {new Date().getFullYear()} {p.name}
+          </p>
+        </footer>
+      </div>
+    </div>
   );
 }
