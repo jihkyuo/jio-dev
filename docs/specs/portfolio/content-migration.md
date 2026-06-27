@@ -85,7 +85,7 @@
 
 | 후보 | 소스 repo | 원자료(jio raw-material/) | 인터뷰(jio raw-material/) | 작성(vd docs/pp) | 발행(jio.dev) |
 |---|---|---|---|---|---|
-| **문진빌더 (A)** | vd-front | ☑ | ☐ | ☐ | ☐ |
+| **문진빌더 (A)** | vd-front | ☑ | ☑ | ☐ | ☐ |
 | 테스트/품질 인프라 (B) | vd-front·vd-web | ☐ | ☐ | ☐ | ☐ |
 | 무인 코드사이닝 CI (C) | vd-front | ☐ | ☐ | ☐ | ☐ |
 | 문진 UI 현대화 (D) | vd-web | ☐ | ☐ | ☐ | ☐ |
