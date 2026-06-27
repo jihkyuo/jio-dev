@@ -8,15 +8,18 @@ export const projectFrontmatterSchema = z.object({
   /** 연도 또는 기간 (예: "2024", "2023–2024") */
   period: z.string().min(1),
   role: z.string().min(1),
-  teamSize: z.string().min(1),
+  /** 팀 규모. 개인 프로젝트엔 없을 수 있어 선택. */
+  teamSize: z.string().min(1).optional(),
   stack: z.array(z.string()).min(1),
-  /** 정량 임팩트 한 줄 (TL;DR) */
+  /** 홈 카드 훅 한 줄(TL;DR). 결과 숫자 강제 아님 — 메커니즘·상태 전환도 허용. */
   impact: z.string().min(1),
   summary: z.string().min(1),
-  links: z.object({
-    live: z.string().url().optional(),
-    repo: z.string().url().optional(),
-  }),
+  links: z
+    .object({
+      live: z.string().url().optional(),
+      repo: z.string().url().optional(),
+    })
+    .optional(),
   /** 노출 순서 (작을수록 먼저) */
   order: z.number().int().optional(),
   featured: z.boolean().optional(),

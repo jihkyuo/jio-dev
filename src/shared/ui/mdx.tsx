@@ -16,6 +16,19 @@ export const mdxComponents: Components = {
   p: ({ children }) => (
     <p className="mb-4 leading-relaxed text-body">{children}</p>
   ),
+  // 헤드라인 칩(도메인 grounding)·메타 줄(역할·스택·신뢰 고지) = case-study-structure §4 ①·② 요소.
+  // 소문자 <p className="chip">는 MDX가 raw HTML 블록으로 흘려보내 매핑을 안 타므로,
+  // 대문자 커스텀 컴포넌트로 받아 시각 위계를 보장한다.
+  Chip: ({ children }) => (
+    <p className="mb-6 inline-block rounded-full border border-line bg-card px-3 py-1 font-mono text-xs text-muted">
+      {children}
+    </p>
+  ),
+  Meta: ({ children }) => (
+    <p className="mb-8 font-mono text-xs leading-relaxed text-muted">
+      {children}
+    </p>
+  ),
   ul: ({ children }) => (
     <ul className="mb-4 space-y-1">{children}</ul>
   ),
@@ -47,5 +60,25 @@ export const mdxComponents: Components = {
     <pre className="mb-4 overflow-x-auto rounded bg-card p-4 font-mono text-sm text-body">
       {children}
     </pre>
+  ),
+  blockquote: ({ children }) => (
+    <blockquote className="mb-8 rounded-xl border-l-4 border-accent bg-card px-5 py-4 text-body [&>p]:mb-0">
+      {children}
+    </blockquote>
+  ),
+  table: ({ children }) => (
+    <div className="mb-8 overflow-x-auto">
+      <table className="w-full border-collapse text-sm">{children}</table>
+    </div>
+  ),
+  th: ({ children }) => (
+    <th className="border border-line bg-card px-3 py-2 text-left align-top font-mono text-xs text-muted">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="border border-line px-3 py-2 align-top leading-relaxed text-body">
+      {children}
+    </td>
   ),
 };

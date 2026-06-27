@@ -49,40 +49,12 @@ export default async function ProjectPage({
         ← Projects
       </Link>
 
-      <h1 className="mb-3 text-3xl font-extrabold text-head">{meta.title}</h1>
-      <p className="mb-8 leading-relaxed text-body">{meta.summary}</p>
-
-      {/* TL;DR strip */}
-      <div className="mb-10 rounded-xl border border-line bg-card p-5">
-        <p className="mb-3 font-mono text-2xl font-bold text-accent">{meta.impact}</p>
-        <p className="mb-4 font-mono text-xs text-muted">
-          역할 {meta.role} · {meta.period} · 팀 {meta.teamSize} · {meta.stack.join(" · ")}
-        </p>
-        {(meta.links.live || meta.links.repo) && (
-          <div className="flex gap-4">
-            {meta.links.live && (
-              <a
-                href={meta.links.live}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-xs text-accent underline underline-offset-2"
-              >
-                Live ↗
-              </a>
-            )}
-            {meta.links.repo && (
-              <a
-                href={meta.links.repo}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-xs text-accent underline underline-offset-2"
-              >
-                Repo ↗
-              </a>
-            )}
-          </div>
-        )}
-      </div>
+      {/*
+        제목만 chrome가 제공하고, 그 아래 헤드라인 칩·요약표(PAAR)·콜아웃·본문·딥다이브는
+        MDX가 5층 골격(case-study-structure.md §4)으로 소유한다. 역할·스택·신뢰 고지는
+        글의 메타 줄에 녹는다 — chrome가 따로 strip으로 중복 렌더하지 않는다.
+      */}
+      <h1 className="mb-6 text-3xl font-extrabold text-head">{meta.title}</h1>
 
       <MDXRemote
         source={content}

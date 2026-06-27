@@ -5,10 +5,11 @@ period: "2026"
 role: 프론트엔드 엔지니어 — 설계·구현 주도
 stack: [React, TypeScript, Zustand, fractional-indexing]
 summary: 팀의 정수 순번 기본안을 버리고, LexoRank류 fractional-indexing을 5층 문진 트리에 적용해 드래그 시 형제 항목 rank 재계산을 없앴다.
+impact: 정수 reindex 폐기 — 드래그 시 형제 항목 rank 재계산 제거
 order: 1
 ---
 
-<p className="chip">🩺 노코드 의료 문진 빌더 · DnD 순서정렬</p>
+<Chip>🩺 노코드 의료 문진 빌더 · DnD 순서정렬</Chip>
 
 의료진이 코드 없이 문진을 설계하는 빌더에서, 문항·선택지를 드래그로 재배치한다. 그 순서를 무엇으로 매길지 — *LexoRank류 fractional-indexing을 5층 문진 트리에 적용한* 결정.
 
@@ -21,7 +22,7 @@ order: 1
 | **실행** | Jira가 대량 항목 순서를 렉 없이 관리하는 방식을 역추적 → **LexoRank류 fractional-indexing** 발견 → 두 항목 **사이값 문자열 키**를 발급해 드래그된 한 노드의 rank만 갱신. 팀에 제안해 시스템 전체가 채택. |
 | **결과** | 드래그 시 **이동 노드 1개의 rank만 재발급, 형제 항목 rank 재계산 없음**(클라 rank-계산 기준). 정렬은 문자열 사전순. 저장은 설계상 문진 트리를 통째로 전송한다. |
 
-<p className="meta">설계·구현 본인 주도 · 순서 시스템은 본인 제안 → 팀이 채택 · React / TypeScript / Zustand · 사내 비공개라 일부 수치는 일반화.</p>
+<Meta>설계·구현 본인 주도 · 순서 시스템은 본인 제안 → 팀이 채택 · React / TypeScript / Zustand · 사내 비공개라 일부 수치는 일반화.</Meta>
 
 ## 핵심 원인 — fractional-indexing의 단순함이 새는 자리
 
