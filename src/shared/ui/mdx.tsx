@@ -9,7 +9,7 @@ export const mdxComponents: Components = {
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-6 mb-3 font-mono text-base font-semibold text-accent">
+    <h3 className="mt-6 mb-3 font-mono text-base font-semibold text-accent [h2+&]:mt-0">
       {children}
     </h3>
   ),
@@ -20,12 +20,12 @@ export const mdxComponents: Components = {
   // 소문자 <p className="chip">는 MDX가 raw HTML 블록으로 흘려보내 매핑을 안 타므로,
   // 대문자 커스텀 컴포넌트로 받아 시각 위계를 보장한다.
   Chip: ({ children }) => (
-    <p className="mb-6 inline-block rounded-full border border-line bg-card px-3 py-1 font-mono text-xs text-muted">
+    <p className="mb-4 inline-block rounded-full border border-line bg-card px-3 py-1.5 font-mono text-sm leading-5 text-body">
       {children}
     </p>
   ),
   Meta: ({ children }) => (
-    <p className="mb-8 font-mono text-xs leading-relaxed text-muted">
+    <p className="mb-10 font-mono text-sm leading-relaxed text-body">
       {children}
     </p>
   ),
@@ -62,22 +62,24 @@ export const mdxComponents: Components = {
     </pre>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="mb-8 rounded-xl border-l-4 border-accent bg-card px-5 py-4 text-body [&>p]:mb-0">
+    <blockquote className="mb-8 rounded-lg border-l-4 border-accent bg-card px-5 py-4 text-body [&>p]:mb-0">
       {children}
     </blockquote>
   ),
   table: ({ children }) => (
-    <div className="mb-8 overflow-x-auto">
+    <div className="mb-4 overflow-x-auto">
       <table className="w-full border-collapse text-sm">{children}</table>
     </div>
   ),
+  // PAAR 요약표는 헤더가 비어 있고 첫 열이 라벨(문제·대안·실행·결과)이다.
+  // 빈 헤더 셀은 empty:hidden으로 접고, 첫 열은 모노로 라벨답게 구분한다.
   th: ({ children }) => (
-    <th className="border border-line bg-card px-3 py-2 text-left align-top font-mono text-xs text-muted">
+    <th className="border border-line bg-card px-4 py-2 text-left align-top font-mono text-xs text-body empty:hidden">
       {children}
     </th>
   ),
   td: ({ children }) => (
-    <td className="border border-line px-3 py-2 align-top leading-relaxed text-body">
+    <td className="border border-line px-4 py-3 align-top leading-relaxed text-body first:whitespace-nowrap first:font-mono first:text-head">
       {children}
     </td>
   ),
