@@ -57,8 +57,8 @@
 ## 요구사항 (Requirements)
 - 홈은 위 IA 순서의 단일 스크롤 페이지로 렌더된다.
 - Experience·Projects 메타는 **타입이 강제된** 데이터 소스에서 읽어 자동 렌더된다(새 항목 추가 = 데이터 한 건 + (프로젝트는) MDX 한 개 추가).
-- 프로젝트 상세는 slug별 MDX에서 렌더되며, 위 Outcome-First 골격(필수 헤딩)을 따른다.
-- 프로젝트 MDX는 **필수 frontmatter**를 가진다: `title` · `slug` · `period` · `role` · `teamSize` · `stack` · `impact` · `summary` · `links`. **누락 시 빌드 실패**(반쯤 깨진 페이지 렌더 금지).
+- 프로젝트 상세는 slug별 MDX에서 렌더되며, [`case-study-structure.md`](./case-study-structure.md)의 5층 골격을 따른다(위 Outcome-First 0~6은 폐기). 상세 chrome는 백링크 + 제목까지만 제공하고 나머지 층은 MDX가 소유한다(TL;DR 스트립 없음).
+- 프로젝트 MDX의 **필수 frontmatter**: `title` · `slug` · `period` · `role` · `stack` · `impact` · `summary`. **누락 시 빌드 실패**(반쯤 깨진 페이지 렌더 금지). **선택**: `teamSize` · `links`(`live`/`repo`) · `order` · `featured`. (`impact`는 홈 카드 훅 줄로 쓰이며 결과 숫자 강제 아님 — 메커니즘·상태 전환도 허용.)
 - 이력서 PDF가 `public/`에 존재하고 Hero·nav·Contact에서 접근 가능하다.
 - Grain·Steel 토큰을 단일 출처(테마/CSS 변수)로 관리한다.
 - 본문·헤딩·muted·링크·카드·focus/hover 상태 텍스트가 모두 가독 대비를 만족한다(본문 AAA ≥7:1).
@@ -71,8 +71,8 @@
 ## 성공 기준 (Acceptance)
 - [ ] Hero에 이름·역할·총 경력·대표 성과 1줄·**이력서 PDF CTA**·보조 CTA(Contact/GitHub)가 보인다.
 - [ ] 모든 Experience 항목이 회사·역할·`YYYY.MM – YYYY.MM` 기간·팀 규모·임팩트 불릿 2+·스택 태그를 렌더한다.
-- [ ] Selected Projects 카드 클릭 → 상세가 필수 헤딩(`TL;DR`·`맥락`·`My Role`·`의사결정`·`임팩트`·`회고`) 순으로 렌더된다.
-- [ ] 프로젝트 MDX의 필수 frontmatter 누락 시 `pnpm build`가 실패한다.
+- [ ] Selected Projects 카드 클릭 → 상세가 5층 골격(헤드라인 칩 → 요약표(PAAR) → 핵심 원인 콜아웃 → 본문 → 딥다이브)으로 렌더된다.
+- [ ] 프로젝트 MDX의 필수 frontmatter(`title`·`slug`·`period`·`role`·`stack`·`impact`·`summary`) 누락 시 `pnpm build`가 실패한다.
 - [ ] `/sitemap.xml`에 모든 프로젝트 상세 URL이 포함된다.
 - [ ] 본문·헤딩·muted·링크 대비가 측정상 기준(본문 AAA)을 만족한다.
 - [ ] `prefers-reduced-motion: reduce`에서 스크롤 reveal 트랜지션·커서 추적이 제거되고 hover transform이 0ms/비활성이다.

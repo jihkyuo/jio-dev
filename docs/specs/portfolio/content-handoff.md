@@ -61,11 +61,11 @@
 | `comfortable` | `["Tailwind","React Query","Vitest"]` | 실무 가능 |
 | `production` | `["GraphQL","Webpack","Node.js"]` | 투입 경험 |
 
-### ☐ 5. 프로젝트 — `content/projects/*.mdx` (2건 전부 목업)
-현재 파일: `payment-widget-rearchitecture.mdx`, `design-system-v2.mdx`. **둘 다 가짜다.** 실제 프로젝트로 교체하거나 새 `.mdx`를 추가(파일 하나 = 프로젝트 하나).
-- **frontmatter(필수 — 누락 시 빌드 실패):** `title` · `slug`(kebab-case, **파일명과 일치**) · `period` · `role` · `teamSize` · `stack`(배열) · `impact`(정량 1줄) · `summary` · `links`(`live`/`repo` 선택). 선택: `order`(작을수록 먼저), `featured`.
-- **본문 골격(Outcome-First, 유지 권장):** `## 맥락 & 문제` → `## My Role & Scope` → `## 의사결정 & 접근`(+ `### 딥다이브 — …`: 제약→버린 선택지→채택→결과→트레이드오프) → `## 임팩트 & 결과`(측정 방법·**팀 성과 vs 본인 기여** 구분) → `## 회고`.
-- 임팩트 수치(`번들 −38%` 등)·회사 맥락 전부 목업이니 실제로.
+### ☐ 5. 프로젝트 — `content/projects/*.mdx` (목업 2건 + 실제 1건)
+현재 파일: `payment-widget-rearchitecture.mdx`·`design-system-v2.mdx`(**둘 다 목업**, 옛 Outcome-First 본문) + `dnd-fractional-indexing.mdx`(**실제 케이스 스터디 1편**, 5층 골격). 목업 2건은 실제 프로젝트로 교체하거나 새 `.mdx`를 추가(파일 하나 = 프로젝트 하나).
+- **frontmatter — 필수(누락 시 빌드 실패):** `title` · `slug`(kebab-case, **파일명과 일치**) · `period` · `role` · `stack`(배열) · `impact`(홈 카드 훅 1줄 — 결과 숫자 강제 아님, 메커니즘·상태 전환도 허용) · `summary`. **선택:** `teamSize` · `links`(`live`/`repo`) · `order`(작을수록 먼저) · `featured`.
+- **본문 골격:** 케이스 스터디는 [`case-study-structure.md`](./case-study-structure.md)의 **5층 골격**으로 쓴다(헤드라인 칩 → 요약표(PAAR) → 콜아웃 → 본문 → 딥다이브). 상세 chrome는 제목 h1까지만 제공하고 나머지는 MDX가 소유한다(TL;DR 스트립 없음). (목업 2건의 `## 맥락 & 문제 → ## My Role…` Outcome-First 본문은 폐기 골격 — 교체 시 5층으로.)
+- 목업 임팩트 수치(`번들 −38%` 등)·회사 맥락은 실제로 교체.
 
 ### ☐ 6. About / Contact 문단 — 컴포넌트 직접 편집
 콘텐츠 레이어가 아님. 파일 안 `{/* 교체 */}` 문단을 직접 수정.

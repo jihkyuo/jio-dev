@@ -19,7 +19,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 ### `src/app/` — App Router(라우팅·레이아웃·메타)
 - `layout.tsx` — 루트 레이아웃(폰트·다크 고정·그레인 위 콘텐츠 래퍼·`<CursorGlow/>`·Analytics).
 - `page.tsx` — 홈. 2단 그리드(좌 `Sidebar` + 우 섹션들), 우측 섹션을 `<Reveal>`로 감싸 스크롤 등장.
-- `projects/[slug]/page.tsx` — 프로젝트 상세(MDX). `generateStaticParams`·`dynamicParams=false`·`generateMetadata`, TL;DR 스트립 + `<MDXRemote>` 본문.
+- `projects/[slug]/page.tsx` — 프로젝트 상세(MDX). `generateStaticParams`·`dynamicParams=false`·`generateMetadata`. chrome는 ← 백링크 + 제목 h1까지만 제공하고, 헤드라인 칩·요약표(PAAR)·콜아웃·본문·딥다이브는 `<MDXRemote>`가 5층 골격(`case-study-structure.md` §4)으로 소유한다.
 - `sitemap.ts` / `sitemap.test.ts` — 사이트맵 생성 + 테스트.
 - `opengraph-image.tsx` — OG 이미지(Grain·Steel 색).
 - `globals.css` — 토큰·그레인·`.rail-grid`·focus-visible·reduced-motion·print·forced-colors·no-JS 폴백.
@@ -51,7 +51,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 - `server-only.ts` — vitest 환경에서 `"server-only"` 패키지 모킹.
 
 ### `content/projects/*.mdx` (저장소 루트)
-프로젝트 상세 본문 + frontmatter(title·slug·period·role·teamSize·stack·impact·summary·links·order). `entities/project`가 읽어 검증.
+프로젝트 상세 본문 + frontmatter. 필수: title·slug·period·role·stack·impact·summary. 선택: teamSize·links·order·featured. `entities/project`가 읽어 검증(필수 누락 시 빌드 throw). 상세 페이지는 `impact`를 strip으로 띄우지 않으며(strip 제거됨), `impact`는 홈 카드(`widgets/projects`) 훅 줄로 쓰인다.
 
 ## 데이터 흐름
 `content/projects/*.mdx` + `src/entities/*/api/*.ts`(zod 검증)
@@ -75,5 +75,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 FSD 마이그레이션 설계 → `docs/superpowers/specs/2026-06-26-fsd-migration-design.md`.
 방향·IA·비주얼·구현 분할 → `docs/specs/portfolio/`(spec + plan-1/2/3).
 
-> ⚠️ **현재 콘텐츠는 전부 목업 샘플이다.** 실제 내용 채우기는
-> `docs/specs/portfolio/content-handoff.md`(어디를 채울지·목업 경계·형식 규칙)를 먼저 읽는다.
+> ⚠️ **콘텐츠는 대부분 목업 샘플이다.** 단 `content/projects/dnd-fractional-indexing.mdx`는
+> 5층 골격으로 작성·발행된 **실제 케이스 스터디 1편**이다(나머지 2개 프로젝트 mdx + 홈/About/Contact는 목업).
+> 홈/프로필/경력 등 목업 교체는 `docs/specs/portfolio/content-handoff.md`(어디를 채울지·목업 경계·형식 규칙),
+> 케이스 스터디 작성·이식은 `docs/specs/portfolio/content-migration.md`(파이프라인)를 먼저 읽는다.
