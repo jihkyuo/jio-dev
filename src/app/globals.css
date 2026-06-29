@@ -11,6 +11,10 @@ html { scroll-behavior: smooth; }
   --accent: #7e9cd4;
   --card: #15181e;
   --line: #1e222a;
+  --note: var(--accent);   /* 블루 — 정보 */
+  --tip: #6fbf8e;          /* 그린 — 권장 */
+  --warning: #d4a45c;      /* 앰버 — 주의 */
+  --decision: #a98fd4;     /* 보라 — 설계 결정 */
 }
 
 @theme inline {
@@ -21,6 +25,10 @@ html { scroll-behavior: smooth; }
   --color-accent: var(--accent);
   --color-card: var(--card);
   --color-line: var(--line);
+  --color-note: var(--note);
+  --color-tip: var(--tip);
+  --color-warning: var(--warning);
+  --color-decision: var(--decision);
   --font-sans: var(--font-noto-kr);
   --font-mono: var(--font-geist-mono);
 }
