@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
+html { scroll-behavior: smooth; }
+/* reduced-motion일 때 scroll-behavior:auto는 기존 :59 규칙이 이미 강제함 */
+
 :root {
   --bg: #101216;
   --head: #f1f3f6;
-  --body: #aab1bd;
+  --body: #b7bdc8;
   --muted: #7e8593;
   --accent: #7e9cd4;
   --card: #15181e;

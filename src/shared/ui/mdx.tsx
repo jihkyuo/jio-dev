@@ -4,17 +4,22 @@ type Components = NonNullable<MDXRemoteProps["components"]>;
 
 export const mdxComponents: Components = {
   h2: ({ children }) => (
-    <h2 className="mt-10 mb-4 border-t border-line pt-6 font-mono text-lg font-semibold text-head">
+    <h2 className="mt-12 mb-4 scroll-mt-24 border-t border-line pt-8 text-2xl font-bold text-head">
       {children}
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-6 mb-3 font-mono text-base font-semibold text-accent [h2+&]:mt-0">
+    <h3 className="mt-8 mb-3 scroll-mt-24 text-xl font-semibold text-head [h2+&]:mt-4">
       {children}
     </h3>
   ),
+  h4: ({ children }) => (
+    <h4 className="mt-6 mb-2 scroll-mt-24 text-base font-semibold text-head">
+      {children}
+    </h4>
+  ),
   p: ({ children }) => (
-    <p className="mb-4 leading-relaxed text-body">{children}</p>
+    <p className="mb-5 text-[1.0625rem] leading-[1.75] text-body">{children}</p>
   ),
   // 헤드라인 칩(도메인 grounding)·메타 줄(역할·스택·신뢰 고지) = case-study-structure §4 ①·② 요소.
   // 소문자 <p className="chip">는 MDX가 raw HTML 블록으로 흘려보내 매핑을 안 타므로,
