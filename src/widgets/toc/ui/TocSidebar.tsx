@@ -1,4 +1,3 @@
-// src/widgets/toc/ui/TocSidebar.tsx
 "use client";
 
 import { useMemo } from "react";
