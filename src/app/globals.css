@@ -82,6 +82,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .cs-blockquote{border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);background:color-mix(in srgb,var(--accent) 18%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.28),0 1px 0 color-mix(in srgb,var(--accent) 40%,transparent) inset}
 
 .cs-code{background:color-mix(in srgb,var(--accent) 18%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);color:var(--head)}
+/* 펜스 코드블럭(pre) 내부 code엔 인라인 알약 스타일 끄기(블록 안 알약 방지) */
+pre .cs-code{background:none;border:0;padding:0}
 
 .cs-table-wrap{border-radius:1rem;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26)}
 .cs-table-wrap th{background:color-mix(in srgb,var(--accent) 18%,transparent);border:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 24%,transparent);padding:.75rem 1.1rem;text-align:left;vertical-align:top;font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--head)}
@@ -114,6 +116,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
   body::before { display: none; }       /* 그레인 */
   body::after{display:none}
   .cs-callout,.cs-blockquote,.cs-table-wrap,.cs-chip{backdrop-filter:none;box-shadow:none}
+  /* 그라데이션 텍스트 제목은 인쇄 시 단색으로 폴백(투명 텍스트 사라짐 방지) */
+  .cs-title{-webkit-text-fill-color:#111;color:#111;background:none}
   .rail-grid { background-image: none; }
   .no-print { display: none !important; }
   .reveal-section { opacity: 1 !important; transform: none !important; }
@@ -127,4 +131,6 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 /* 고대비(Windows High Contrast 등): 콘텐츠 가시성 보장, 글로우 무력화 */
 @media (forced-colors: active) {
   .reveal-section { opacity: 1 !important; transform: none !important; }
+  /* 그라데이션 텍스트 제목은 배경 클리핑이 꺼지면 사라지므로 시스템 색으로 폴백 */
+  .cs-title{-webkit-text-fill-color:CanvasText;color:CanvasText;background:none}
 }

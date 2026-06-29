@@ -58,7 +58,7 @@ export default async function ProjectPage({
         MDX가 5층 골격(case-study-structure.md §4)으로 소유한다. 역할·스택·신뢰 고지는
         글의 메타 줄에 녹는다 — chrome가 따로 strip으로 중복 렌더하지 않는다.
       */}
-      <h1 className="mb-4 text-3xl font-extrabold leading-tight bg-gradient-to-r from-head to-accent bg-clip-text text-transparent">{meta.title}</h1>
+      <h1 className="cs-title mb-4 text-3xl font-extrabold leading-tight bg-gradient-to-r from-head to-accent bg-clip-text text-transparent">{meta.title}</h1>
 
       <TableOfContents headings={headings} />
 
