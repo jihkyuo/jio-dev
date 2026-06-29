@@ -1,44 +1,86 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import type { TocHeading } from "@/shared/lib/extractHeadings";
+import { groupHeadings, findOwnerId } from "../lib/groupHeadings";
+import { useActiveHeading } from "../lib/useActiveHeading";
 
 export function TocSidebar({ headings }: { headings: TocHeading[] }) {
-  const [activeId, setActiveId] = useState<string>("");
-
-  useEffect(() => {
-    const els = headings
-      .map((h) => document.getElementById(h.id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) setActiveId(visible[0].target.id);
-      },
-      { rootMargin: "0px 0px -70% 0px", threshold: 0 },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [headings]);
+  const sections = useMemo(() => groupHeadings(headings), [headings]);
+  const ids = useMemo(() => headings.map((h) => h.id), [headings]);
+  const activeId = useActiveHeading(ids);
+  const ownerId = findOwnerId(sections, activeId);
 
   return (
     <nav aria-label="목차" className="font-mono text-sm">
-      <p className="mb-3 text-xs uppercase tracking-wide text-muted">목차</p>
-      <ul className="space-y-2">
-        {headings.map((h) => (
-          <li key={h.id} className={h.level === 3 ? "pl-3" : ""}>
-            <a
-              href={`#${h.id}`}
-              className={
-                "block leading-snug transition-colors " +
-                (activeId === h.id ? "text-accent" : "text-muted hover:text-body")
-              }
+      <p className="mb-4 pl-1 text-xs uppercase tracking-wide text-muted">목차</p>
+      <ul>
+        {sections.map((s) => {
+          const isOwner = s.heading.id === ownerId;
+          const hasChildren = s.children.length > 0;
+          const expanded = isOwner && hasChildren;
+          return (
+            <li
+              key={s.heading.id}
+              className={"transition-opacity duration-300 " + (isOwner ? "opacity-100" : "opacity-40")}
             >
-              {h.text}
-            </a>
-          </li>
-        ))}
+              <a
+                href={`#${s.heading.id}`}
+                aria-current={activeId === s.heading.id ? "location" : undefined}
+                className={
+                  "flex items-start gap-2 py-1.5 leading-snug transition-colors " +
+                  (isOwner ? "text-head" : "text-muted hover:text-body")
+                }
+              >
+                {hasChildren ? (
+                  <svg
+                    viewBox="0 0 8 10"
+                    aria-hidden
+                    className={
+                      "mt-1.5 h-2.5 w-2 flex-none transition-transform duration-300 " +
+                      (expanded ? "rotate-90 text-accent" : "text-muted")
+                    }
+                  >
+                    <path d="M0 0l8 5-8 5z" fill="currentColor" />
+                  </svg>
+                ) : (
+                  <span className="mt-1.5 h-2.5 w-2 flex-none" aria-hidden />
+                )}
+                <span className="flex-1">{s.heading.text}</span>
+              </a>
+
+              {hasChildren && (
+                <div
+                  inert={!expanded ? true : undefined}
+                  className={
+                    "grid overflow-hidden pl-[18px] transition-[grid-template-rows] duration-300 ease-out " +
+                    (expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+                  }
+                >
+                  <ul className="min-h-0">
+                    {s.children.map((c) => {
+                      const active = activeId === c.id;
+                      return (
+                        <li key={c.id}>
+                          <a
+                            href={`#${c.id}`}
+                            aria-current={active ? "location" : undefined}
+                            className={
+                              "block border-l py-1.5 pl-[10px] text-[12.8px] leading-snug transition-colors " +
+                              (active ? "border-accent text-head" : "border-line text-body hover:text-head")
+                            }
+                          >
+                            {c.text}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
