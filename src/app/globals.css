@@ -51,6 +51,12 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(40% 35% at 18% 12%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),
+    radial-gradient(45% 40% at 85% 30%,color-mix(in srgb,var(--decision) 14%,transparent),transparent 70%),
+    radial-gradient(50% 45% at 70% 88%,color-mix(in srgb,var(--tip) 9%,transparent),transparent 72%);}
+
 /* Blueprint 좌측 레일의 옅은 도트 그리드 (양산 사이드바 탈피용 텍스처) */
 .rail-grid {
   background-image: radial-gradient(
@@ -67,6 +73,31 @@ body::before {
   border-radius: 2px;
 }
 
+/* 케이스 스터디 G2 Tintglass — 채색 글래스 */
+.cs-h2{position:relative;padding-left:1rem}
+.cs-h2::before{content:"";position:absolute;left:0;top:.16em;bottom:.16em;width:4px;border-radius:4px;background:linear-gradient(var(--accent),color-mix(in srgb,#fff 60%,var(--accent)));box-shadow:0 0 12px color-mix(in srgb,var(--accent) 55%,transparent)}
+
+.cs-chip{border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);background:color-mix(in srgb,var(--accent) 20%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 4px 16px rgba(0,0,0,.24),0 1px 0 color-mix(in srgb,#fff 18%,transparent) inset;color:var(--head)}
+
+.cs-blockquote{border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);background:color-mix(in srgb,var(--accent) 18%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.28),0 1px 0 color-mix(in srgb,var(--accent) 40%,transparent) inset}
+
+.cs-code{background:color-mix(in srgb,var(--accent) 18%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);color:var(--head)}
+
+.cs-table-wrap{border-radius:1rem;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26)}
+.cs-table-wrap th{background:color-mix(in srgb,var(--accent) 18%,transparent);border:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 24%,transparent);padding:.75rem 1.1rem;text-align:left;vertical-align:top;font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--head)}
+.cs-table-wrap th:empty{display:none}
+.cs-table-wrap td{border:none;border-bottom:1px solid color-mix(in srgb,#fff 8%,transparent);padding:.85rem 1.1rem;vertical-align:top;line-height:1.6;color:var(--body)}
+.cs-table-wrap tr:last-child td{border-bottom:none}
+.cs-table-wrap td:first-child{white-space:nowrap;font-family:var(--font-mono);font-weight:600;color:var(--accent)}
+
+.cs-callout{--c:var(--accent);border:1px solid color-mix(in srgb,var(--c) 34%,transparent);background:color-mix(in srgb,var(--c) 22%,color-mix(in srgb,var(--card) 40%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.3),0 1px 0 color-mix(in srgb,var(--c) 45%,transparent) inset}
+.cs-note{--c:var(--note)}
+.cs-tip{--c:var(--tip)}
+.cs-warning{--c:var(--warning)}
+.cs-decision{--c:var(--decision)}
+.cs-callout-label{color:var(--c)}
+.cs-callout-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:9px;flex:none;border:1px solid color-mix(in srgb,#fff 20%,transparent);background:color-mix(in srgb,var(--c) 40%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}
+
 /* 모션 최소화 — 모든 트랜지션/애니메이션 무력화 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -81,6 +112,8 @@ body::before {
 @media print {
   body { background: #fff; color: #111; }
   body::before { display: none; }       /* 그레인 */
+  body::after{display:none}
+  .cs-callout,.cs-blockquote,.cs-table-wrap,.cs-chip{backdrop-filter:none;box-shadow:none}
   .rail-grid { background-image: none; }
   .no-print { display: none !important; }
   .reveal-section { opacity: 1 !important; transform: none !important; }

@@ -7,7 +7,7 @@ type Components = NonNullable<MDXRemoteProps["components"]>;
 export const mdxComponents: Components = {
   Callout,
   h2: ({ id, children }) => (
-    <h2 id={id} className="group mt-12 mb-4 scroll-mt-24 border-t border-line pt-8 text-2xl font-bold text-head">
+    <h2 id={id} className="cs-h2 group mt-12 mb-4 scroll-mt-24 text-2xl font-bold text-head">
       {children}
       {id && <HeadingAnchor id={id} />}
     </h2>
@@ -31,7 +31,7 @@ export const mdxComponents: Components = {
   // 소문자 <p className="chip">는 MDX가 raw HTML 블록으로 흘려보내 매핑을 안 타므로,
   // 대문자 커스텀 컴포넌트로 받아 시각 위계를 보장한다.
   Chip: ({ children }) => (
-    <p className="mb-4 inline-block rounded-full border border-line bg-card px-3 py-1.5 font-mono text-sm leading-5 text-body">
+    <p className="cs-chip mb-4 inline-block rounded-full px-3 py-1.5 font-mono text-sm leading-5">
       {children}
     </p>
   ),
@@ -63,9 +63,7 @@ export const mdxComponents: Components = {
     <strong className="font-semibold text-head">{children}</strong>
   ),
   code: ({ children }) => (
-    <code className="rounded bg-card px-1.5 py-0.5 font-mono text-sm text-body">
-      {children}
-    </code>
+    <code className="cs-code rounded px-1.5 py-0.5 font-mono text-sm">{children}</code>
   ),
   pre: ({ children }) => (
     <pre className="mb-4 overflow-x-auto rounded bg-card p-4 font-mono text-sm text-body">
@@ -73,25 +71,16 @@ export const mdxComponents: Components = {
     </pre>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="mb-8 rounded-lg border-l-4 border-accent bg-card px-5 py-4 text-body [&>p]:mb-0">
+    <blockquote className="cs-blockquote mb-8 rounded-2xl px-5 py-4 text-head [&>p]:mb-0">
       {children}
     </blockquote>
   ),
   table: ({ children }) => (
-    <div className="mb-4 overflow-x-auto">
+    <div className="cs-table-wrap mb-4 overflow-x-auto">
       <table className="w-full border-collapse text-sm">{children}</table>
     </div>
   ),
-  // PAAR 요약표는 헤더가 비어 있고 첫 열이 라벨(문제·대안·실행·결과)이다.
-  // 빈 헤더 셀은 empty:hidden으로 접고, 첫 열은 모노로 라벨답게 구분한다.
-  th: ({ children }) => (
-    <th className="border border-line bg-card px-4 py-2 text-left align-top font-mono text-xs text-body empty:hidden">
-      {children}
-    </th>
-  ),
-  td: ({ children }) => (
-    <td className="border border-line px-4 py-3 align-top leading-relaxed text-body first:whitespace-nowrap first:font-mono first:text-head">
-      {children}
-    </td>
-  ),
+  // 표 시각(빈 헤더 숨김·첫 열 모노 강조 포함)은 globals.css .cs-table-wrap 자손 규칙이 담당.
+  th: ({ children }) => <th>{children}</th>,
+  td: ({ children }) => <td>{children}</td>,
 };
