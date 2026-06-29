@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import { getProjectSlugs, getProjectContent, getProjectBySlug, type ProjectMeta } from "@/entities/project";
 import { mdxComponents } from "@/shared/ui/mdx";
 
@@ -59,7 +60,7 @@ export default async function ProjectPage({
       <MDXRemote
         source={content}
         components={mdxComponents}
-        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
       />
     </main>
   );

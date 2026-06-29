@@ -1,23 +1,27 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { Callout } from "@/shared/ui/Callout";
+import { HeadingAnchor } from "@/shared/ui/HeadingAnchor";
 
 type Components = NonNullable<MDXRemoteProps["components"]>;
 
 export const mdxComponents: Components = {
   Callout,
-  h2: ({ children }) => (
-    <h2 className="mt-12 mb-4 scroll-mt-24 border-t border-line pt-8 text-2xl font-bold text-head">
+  h2: ({ id, children }) => (
+    <h2 id={id} className="group mt-12 mb-4 scroll-mt-24 border-t border-line pt-8 text-2xl font-bold text-head">
       {children}
+      {id && <HeadingAnchor id={id} />}
     </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="mt-8 mb-3 scroll-mt-24 text-xl font-semibold text-head [h2+&]:mt-4">
+  h3: ({ id, children }) => (
+    <h3 id={id} className="group mt-8 mb-3 scroll-mt-24 text-xl font-semibold text-head [h2+&]:mt-4">
       {children}
+      {id && <HeadingAnchor id={id} />}
     </h3>
   ),
-  h4: ({ children }) => (
-    <h4 className="mt-6 mb-2 scroll-mt-24 text-base font-semibold text-head">
+  h4: ({ id, children }) => (
+    <h4 id={id} className="group mt-6 mb-2 scroll-mt-24 text-base font-semibold text-head">
       {children}
+      {id && <HeadingAnchor id={id} />}
     </h4>
   ),
   p: ({ children }) => (
