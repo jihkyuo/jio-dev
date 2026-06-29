@@ -26,7 +26,7 @@ export function TableOfContents({ headings }: { headings: TocHeading[] }) {
       </details>
 
       {/* xl+: 좌측 여백 sticky 사이드(본문 중앙 정렬 유지, fixed로 흐름 이탈) */}
-      <aside className="no-print fixed top-24 left-[max(1.5rem,calc(50%-34rem))] hidden max-h-[calc(100vh-8rem)] w-52 overflow-y-auto xl:block">
+      <aside className="no-print fixed top-24 left-[min(calc(50%+20rem),calc(100vw-14rem))] hidden max-h-[calc(100vh-8rem)] w-52 overflow-y-auto xl:block">
         <TocSidebar headings={headings} />
       </aside>
     </>
