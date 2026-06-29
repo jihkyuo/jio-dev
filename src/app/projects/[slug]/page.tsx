@@ -6,6 +6,8 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { getProjectSlugs, getProjectContent, getProjectBySlug, type ProjectMeta } from "@/entities/project";
 import { mdxComponents } from "@/shared/ui/mdx";
+import { extractHeadings } from "@/shared/lib/extractHeadings";
+import { TableOfContents } from "@/widgets/toc";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -41,6 +43,7 @@ export default async function ProjectPage({
     return notFound();
   }
   const { meta, content } = data;
+  const headings = extractHeadings(content);
   return (
     <main className="relative z-1 mx-auto max-w-2xl px-6 py-16">
       <Link
@@ -56,6 +59,8 @@ export default async function ProjectPage({
         글의 메타 줄에 녹는다 — chrome가 따로 strip으로 중복 렌더하지 않는다.
       */}
       <h1 className="mb-4 text-3xl font-extrabold leading-tight text-head">{meta.title}</h1>
+
+      <TableOfContents headings={headings} />
 
       <MDXRemote
         source={content}
