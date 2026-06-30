@@ -138,9 +138,15 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 /* shiki가 pre에 입히는 테마 배경을 무력화 — 글래스가 배경을 맡는다. 패딩·스크롤만 남긴다. */
 .cs-codeblock pre{margin:0;padding:1.1rem 1.2rem;overflow-x:auto;background:transparent!important;font-family:var(--font-mono);font-size:.85rem;line-height:1.6}
 .cs-codeblock code{display:grid;background:transparent}
-.cs-codeblock-copy{position:absolute;top:.6rem;right:.6rem;padding:.25rem .6rem;border-radius:.5rem;border:1px solid color-mix(in srgb,#fff 14%,transparent);background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--muted);opacity:0;transition:opacity .18s,color .18s,border-color .18s}
+/* cursor:pointer — Tailwind v4 preflight는 버튼 기본 커서를 손가락으로 안 바꾼다. */
+.cs-codeblock-copy{position:absolute;top:.6rem;right:.6rem;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:.5rem;border:1px solid color-mix(in srgb,#fff 14%,transparent);background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--muted);cursor:pointer;opacity:0;transition:opacity .18s,color .18s,border-color .18s}
+.cs-codeblock-copy svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s,opacity .18s}
 .cs-codeblock:hover .cs-codeblock-copy,.cs-codeblock-copy:focus{opacity:1}
 .cs-codeblock-copy:hover{color:var(--head);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+/* 복사됨: 그린 체크 + 보더 그린 틴트. hover보다 우선하도록 뒤에 둔다. */
+.cs-codeblock-copy[data-copied]{opacity:1;color:var(--tip);border-color:color-mix(in srgb,var(--tip) 45%,transparent)}
+.cs-codeblock-copy[data-copied] svg{animation:cs-copy-pop .22s ease-out}
+@keyframes cs-copy-pop{from{transform:scale(.6);opacity:.4}to{transform:scale(1);opacity:1}}
 
 /* 인라인 링크 3종 표식(SVG) + hover. 외부=박스화살표(뒤)·다른 글=문서(앞)·앵커=체인(앞). */
 .cs-link{text-decoration-color:color-mix(in srgb,var(--accent) 50%,transparent);transition:color .15s ease,text-decoration-color .15s ease,text-decoration-thickness .15s ease}

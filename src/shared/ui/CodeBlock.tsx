@@ -30,10 +30,22 @@ export function CodeBlock(props: ComponentPropsWithoutRef<"pre">) {
       <button
         type="button"
         onClick={copy}
-        aria-label="코드 복사"
-        className="cs-codeblock-copy no-print font-mono text-xs"
+        aria-label={copied ? "복사됨" : "코드 복사"}
+        data-copied={copied || undefined}
+        className="cs-codeblock-copy no-print"
       >
-        {copied ? "복사됨" : "복사"}
+        {copied ? (
+          // 복사됨: 체크
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        ) : (
+          // 기본: 클립보드
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="9" y="9" width="11" height="11" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        )}
       </button>
       <pre ref={ref} {...props} />
     </div>
