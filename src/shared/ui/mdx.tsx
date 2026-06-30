@@ -9,13 +9,13 @@ export const mdxComponents: Components = {
   Callout,
   Hl,
   h2: ({ id, children }) => (
-    <h2 id={id} className="cs-h2 group mt-12 mb-4 scroll-mt-24 text-2xl font-bold text-head">
+    <h2 id={id} className="cs-h2 group mt-12 mb-4 scroll-mt-24 text-2xl font-bold tracking-[-0.02em] text-head">
       {children}
       {id && <HeadingAnchor id={id} />}
     </h2>
   ),
   h3: ({ id, children }) => (
-    <h3 id={id} className="group mt-8 mb-3 scroll-mt-24 text-xl font-semibold text-head [h2+&]:mt-4">
+    <h3 id={id} className="group mt-8 mb-3 scroll-mt-24 text-xl font-semibold tracking-[-0.02em] text-head [h2+&]:mt-4">
       {children}
       {id && <HeadingAnchor id={id} />}
     </h3>
@@ -27,7 +27,7 @@ export const mdxComponents: Components = {
     </h4>
   ),
   p: ({ children }) => (
-    <p className="mb-5 text-[1.0625rem] leading-[1.75] text-body">{children}</p>
+    <p className="mb-6.5 text-[1.0625rem] leading-[1.75] text-body">{children}</p>
   ),
   // 헤드라인 칩(도메인 grounding)·메타 줄(역할·스택·신뢰 고지) = case-study-structure §4 ①·② 요소.
   // 소문자 <p className="chip">는 MDX가 raw HTML 블록으로 흘려보내 매핑을 안 타므로,
@@ -43,10 +43,10 @@ export const mdxComponents: Components = {
     </p>
   ),
   ul: ({ children }) => (
-    <ul className="mb-4 space-y-1">{children}</ul>
+    <ul className="mb-4 space-y-2">{children}</ul>
   ),
   li: ({ children }) => (
-    <li className="flex gap-2 text-body">
+    <li className="flex gap-2 text-[1.0625rem] leading-[1.75] text-body">
       <span aria-hidden="true" className="mt-0.5 shrink-0 text-accent">▹</span>
       <span>{children}</span>
     </li>
@@ -54,7 +54,7 @@ export const mdxComponents: Components = {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="text-accent underline underline-offset-2"
+      className="text-accent underline underline-offset-2 visited:text-accent/70"
       target={href?.startsWith("http") ? "_blank" : undefined}
       rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
     >
@@ -65,7 +65,7 @@ export const mdxComponents: Components = {
     <strong className="font-semibold text-head">{children}</strong>
   ),
   code: ({ children }) => (
-    <code className="cs-code rounded px-1.5 py-0.5 font-mono text-sm">{children}</code>
+    <code className="cs-code rounded px-1.5 py-0.5 font-mono text-[0.9em]">{children}</code>
   ),
   pre: ({ children }) => (
     <pre className="mb-4 overflow-x-auto rounded bg-card p-4 font-mono text-sm text-body">
