@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -10,6 +10,7 @@ import { mdxComponents } from "@/shared/ui/mdx";
 import { References, Reference } from "@/shared/ui/References";
 import { extractHeadings } from "@/shared/lib/extractHeadings";
 import { mergeReferences } from "@/shared/lib/mergeReferences";
+import { splitLeadAndBody } from "@/shared/lib/splitLeadAndBody";
 import { TableOfContents } from "@/widgets/toc";
 
 export function generateStaticParams() {
@@ -68,6 +69,18 @@ export default async function ProjectPage({
   // 본문 외부 링크를 자동 레퍼런스로. frontmatter references와 url로 병합해
   // title/description을 보강한다(없으면 링크 텍스트가 title).
   const references = mergeReferences(content, meta.references);
+  // 도입 훅(칩·도입 단락)과 본문(요약~)을 첫 h2에서 갈라 그 사이에 목차를 끼운다.
+  // 단일 MDX 패스를 유지하려고 둘로 쪼개 렌더하지 않고 <Toc/> 컴포넌트를 주입한다 —
+  // 그래야 rehype-slug 헤딩 id·각주·참조링크가 문서 전체 범위로 일관되게 해석된다.
+  const { lead, body } = splitLeadAndBody(content);
+  const source = headings.length === 0 ? content : `${lead.trimEnd()}\n\n<Toc />\n\n${body}`;
+  const components = { ...mdxComponents, Toc: () => <TableOfContents headings={headings} /> };
+  const mdxOptions: MDXRemoteProps["options"] = {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug, [rehypePrettyCode, { theme: "one-dark-pro" }]],
+    },
+  };
   return (
     <main className="relative z-1 mx-auto max-w-2xl px-6 py-16">
       <Link
@@ -84,18 +97,8 @@ export default async function ProjectPage({
       */}
       <h1 className="cs-title mb-4 text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.02em]">{renderTitle(meta.title, meta.titleHighlight)}</h1>
 
-      <TableOfContents headings={headings} />
-
-      <MDXRemote
-        source={content}
-        components={mdxComponents}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeSlug, [rehypePrettyCode, { theme: "one-dark-pro" }]],
-          },
-        }}
-      />
+      {/* 도입 훅(칩·도입 단락) → 목차(<Toc/> 주입) → 본문(요약~). 목차는 "이 글이 뭔지" 잡은 뒤에 온다. */}
+      <MDXRemote source={source} components={components} options={mdxOptions} />
 
       {references.length > 0 && (
         <References>

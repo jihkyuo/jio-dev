@@ -130,7 +130,7 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 .cs-ref-arrow{opacity:0;transition:opacity .18s}
 .cs-ref:hover .cs-ref-arrow{opacity:1}
 
-/* 모바일(접이식) 목차 — 본문 글래스 카드 톤 계승(.cs-ref). bg-card 단색은 너무 어두워 결이 어긋났다. */
+/* 모바일/태블릿 인라인 목차 카드 — 본문 글래스 카드 톤 계승(.cs-ref). '목차' 헤더는 카드 밖(.cs-h2). */
 .cs-toc{border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26)}
 
 /* 코드블럭 — 글래스 컨테이너 + 복사 버튼(우상단). shiki(one-dark-pro) 토큰 위에 글래스 톤(.cs-callout/.cs-ref 계승). */
