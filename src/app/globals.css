@@ -15,6 +15,7 @@ html { scroll-behavior: smooth; }
   --tip: #6fbf8e;          /* 그린 — 권장 */
   --warning: #d4a45c;      /* 앰버 — 주의 */
   --decision: #a98fd4;     /* 보라 — 설계 결정 */
+  --code: #e0966b;         /* 코랄-오렌지 — 인라인코드(하이라이트 블루와 색 역할 분리) */
 }
 
 @theme inline {
@@ -81,9 +82,15 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 
 .cs-blockquote{border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);background:color-mix(in srgb,var(--accent) 18%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.28),0 1px 0 color-mix(in srgb,var(--accent) 40%,transparent) inset}
 
-.cs-code{background:color-mix(in srgb,var(--accent) 18%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);color:var(--head)}
+.cs-code{background:color-mix(in srgb,var(--code) 16%,transparent);border:1px solid color-mix(in srgb,var(--code) 28%,transparent);color:var(--code)}
 /* 펜스 코드블럭(pre) 내부 code엔 인라인 알약 스타일 끄기(블록 안 알약 방지) */
-pre .cs-code{background:none;border:0;padding:0}
+pre .cs-code{background:none;border:0;padding:0;color:inherit}
+
+/* 단어 하이라이트(A Marker) — accent 풀하이트 틴트 마커. 시맨틱 색은 .dc/.wn/.tp */
+.cs-mark{background:color-mix(in srgb,var(--accent) 24%,transparent);color:var(--head);border-radius:5px;padding:.05em .3em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.cs-mark.dc{background:color-mix(in srgb,var(--decision) 24%,transparent)}
+.cs-mark.wn{background:color-mix(in srgb,var(--warning) 24%,transparent)}
+.cs-mark.tp{background:color-mix(in srgb,var(--tip) 24%,transparent)}
 
 .cs-table-wrap{border-radius:1rem;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26)}
 .cs-table-wrap th{background:color-mix(in srgb,var(--accent) 18%,transparent);border:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 24%,transparent);padding:.75rem 1.1rem;text-align:left;vertical-align:top;font-family:var(--font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--head)}

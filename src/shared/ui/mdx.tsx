@@ -1,11 +1,13 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { Callout } from "@/shared/ui/Callout";
+import { Hl } from "@/shared/ui/Hl";
 import { HeadingAnchor } from "@/shared/ui/HeadingAnchor";
 
 type Components = NonNullable<MDXRemoteProps["components"]>;
 
 export const mdxComponents: Components = {
   Callout,
+  Hl,
   h2: ({ id, children }) => (
     <h2 id={id} className="cs-h2 group mt-12 mb-4 scroll-mt-24 text-2xl font-bold text-head">
       {children}
