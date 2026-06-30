@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -12,6 +11,7 @@ import { extractHeadings } from "@/shared/lib/extractHeadings";
 import { mergeReferences } from "@/shared/lib/mergeReferences";
 import { splitLeadAndBody } from "@/shared/lib/splitLeadAndBody";
 import { TableOfContents } from "@/widgets/toc";
+import { BackLink } from "./BackLink";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
@@ -83,12 +83,7 @@ export default async function ProjectPage({
   };
   return (
     <main className="relative z-1 mx-auto max-w-2xl px-6 py-16">
-      <Link
-        href="/#projects"
-        className="mb-10 inline-block font-mono text-sm text-muted transition-colors hover:text-head"
-      >
-        ← Projects
-      </Link>
+      <BackLink />
 
       {/*
         제목만 chrome가 제공하고, 그 아래 헤드라인 칩·요약표(PAAR)·콜아웃·본문·딥다이브는
