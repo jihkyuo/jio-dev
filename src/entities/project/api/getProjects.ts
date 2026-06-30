@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
@@ -29,7 +30,10 @@ function loadAll(): ProjectMeta[] {
   );
 }
 
-export function getProjects(): ProjectMeta[] {
+// cache(): 한 번의 RSC 렌더(요청) 안에서 디스크 읽기·검증을 1회로 메모이즈.
+// 인라인 링크 프리뷰가 링크마다 getProjectBySlug → getProjects를 부르므로 N×M I/O를 제거한다.
+// 렌더 컨텍스트 밖(테스트·빌드 스크립트)에선 그냥 통과(메모이즈 없음)라 동작은 동일.
+export const getProjects = cache((): ProjectMeta[] => {
   return loadAll().sort((a, b) => {
     const byOrder =
       (a.order ?? Number.MAX_SAFE_INTEGER) -
@@ -37,7 +41,7 @@ export function getProjects(): ProjectMeta[] {
     // 같은 order면 slug로 결정적 정렬(파일시스템 순서 의존 제거).
     return byOrder !== 0 ? byOrder : a.slug.localeCompare(b.slug);
   });
-}
+});
 
 export function getProjectSlugs(): string[] {
   return getProjects().map((p) => p.slug);
