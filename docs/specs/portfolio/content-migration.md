@@ -94,7 +94,7 @@
 | 글 | 소스(후보·토픽) | 원자료 | 인터뷰 | 작성 | 발행 |
 |---|---|---|---|---|---|
 | **DnD Sibling-scoped Fractional Rank** | 문진빌더(A)·토픽② | ☑ | ☑ | ☑ | ☑ |
-| DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☑ | ☐ |
+| DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☑ | ☑ |
 | 후속연결 순환탐지(제품 예측+검증 전략) | 문진빌더(A)·토픽③ | ☑ | ☑ | ☐ | ☐ |
 | air-gap 문진 이관·배포 lifecycle | 문진빌더(A)·토픽④ | ☑ | ☑ | ☐ | ☐ |
 | 테스트/품질 인프라 (B) | vd-front·vd-web | ☐ | ☐ | ☐ | ☐ |
@@ -105,13 +105,12 @@
 > 단계 완료 시 ☑로 갱신. 글 추가 시 행 추가.
 > **모바일 미리보기 이식·DTO/nanoId**(토픽⑤)는 독립 글이 아님 — AI 네이티브 관통 테마의 증거로 overview·bullet에 녹인다(raw-material §0 C4·§9.2 결정).
 
-### 5.1 ★ 다음 글 1순위 — DraftStore 엔진 교체 (토픽①)
+### 5.1 ★ 다음 글 1순위 — air-gap 이관·배포 lifecycle (토픽④) [추천·확정 대기]
 
-확정 다음 작업 = **RHF→Zustand+immer DraftStore 엔진 교체** 글. 근거:
-- raw-material §7·§9.2가 이 토픽을 **"설계·검증 깊이가 AI 생산성의 상한"** 관통 테마의 **#1 증명처**로 지목.
-- 코드 방어력이 가장 두껍다: 14,000줄 폼 엔진 청산(179파일 +711/−14,172) · 동등성 하니스로 회귀 0 보증 · `temporal(persist(immer))` undo/redo · 실시간 에러와 저장 차단이 동일 13룰 공유.
-- 지배 질문 = 레거시 전환형("한 번에 갈아엎지 않고 위험을 어떻게 쪼갰나") — 평행 재구현+QA 게이트 컷오버 서사가 강함.
-- 진입: 파이프라인 4단계(골격대로 작성)부터. 원자료·인터뷰는 [`raw-material/questionnaire-builder.md`](./raw-material/questionnaire-builder.md) §1·§7·§9에 확정(☑) — 바로 쓸 수 있다.
+DraftStore 엔진 교체(토픽①)는 **발행 완료** — [`content/projects/immutable-form-tree.mdx`](../../../content/projects/immutable-form-tree.mdx)(루브릭 4.83 · /codex · 30초 스킴 통과, 목업 2건 정리·라우팅 확인까지 7단계 마감). 다음 1순위 후보(둘 다 원자료·인터뷰 ☑ → 4단계 바로 진입):
+
+- **추천 = air-gap 문진 이관·배포 lifecycle (토픽④).** 발행된 2편(DnD·DraftStore)이 둘 다 "설계" 축이라, **배포 안전성·부수효과 동기화(낙관적 회피+onSettled 캐시 무효화)·도메인 제약(온프렘 망분리 수동 이관)**이라는 다른 시니어 역량 차원을 덮는다(§3 선별기준). 오너십 깨끗(FE 기여=동기화 전략, lifecycle 상태머신=팀 공동 — raw-material §0 C2). 지배 질문 = 협업·제품형. 원자료 [`questionnaire-builder.md`](./raw-material/questionnaire-builder.md) §4.
+- **대안 = 후속연결 순환탐지 (토픽③).** 제품에서 순환 예측+검증 전략 서사. 단 알고리즘(3색 DFS) 오너십이 AI와 갈려(raw-material §3·§0 C3) 프레이밍 주의 필요, 주제도 기존 설계 축과 겹침.
 
 ## 6. 첫 케이스 — 문진빌더
 
