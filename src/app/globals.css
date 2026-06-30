@@ -107,6 +107,13 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 .cs-callout-label{color:var(--c)}
 .cs-callout-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:9px;flex:none;border:1px solid color-mix(in srgb,#fff 20%,transparent);background:color-mix(in srgb,var(--c) 40%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}
 
+/* 레퍼런스 카드 — favicon 뱃지 + 글래스 카드(.cs-callout 톤 계승) */
+.cs-ref{border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26);transition:border-color .18s,transform .18s,box-shadow .18s}
+.cs-ref:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent);transform:translateY(-1px);box-shadow:0 12px 36px rgba(0,0,0,.34)}
+.cs-ref-icon{border:1px solid color-mix(in srgb,#fff 12%,transparent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.cs-ref-arrow{opacity:0;transition:opacity .18s}
+.cs-ref:hover .cs-ref-arrow{opacity:1}
+
 /* 모션 최소화 — 모든 트랜지션/애니메이션 무력화 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -122,7 +129,7 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
   body { background: #fff; color: #111; }
   body::before { display: none; }       /* 그레인 */
   body::after{display:none}
-  .cs-callout,.cs-blockquote,.cs-table-wrap,.cs-chip{backdrop-filter:none;box-shadow:none}
+  .cs-callout,.cs-blockquote,.cs-table-wrap,.cs-chip,.cs-ref{backdrop-filter:none;box-shadow:none}
   /* 그라데이션 텍스트 제목은 인쇄 시 단색으로 폴백(투명 텍스트 사라짐 방지) */
   .cs-title{-webkit-text-fill-color:#111;color:#111;background:none}
   .rail-grid { background-image: none; }
