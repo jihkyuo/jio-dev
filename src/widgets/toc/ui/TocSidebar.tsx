@@ -28,8 +28,8 @@ export function TocSidebar({ headings }: { headings: TocHeading[] }) {
                 href={`#${s.heading.id}`}
                 aria-current={activeId === s.heading.id ? "location" : undefined}
                 className={
-                  "flex items-start gap-2 py-1.5 leading-snug transition-colors " +
-                  (isOwner ? "text-head" : "text-muted hover:text-body")
+                  "flex items-start gap-2 border-l-2 pl-2.5 py-1.5 leading-snug transition-colors " +
+                  (isOwner ? "border-accent text-head" : "border-transparent text-muted hover:text-body")
                 }
               >
                 {hasChildren ? (
@@ -54,7 +54,7 @@ export function TocSidebar({ headings }: { headings: TocHeading[] }) {
                   inert={!expanded ? true : undefined}
                   className={
                     "grid overflow-hidden pl-[18px] transition-[grid-template-rows] duration-300 ease-out " +
-                    (expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]")
+                    (expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr] pointer-events-none")
                   }
                 >
                   <ul className="min-h-0">

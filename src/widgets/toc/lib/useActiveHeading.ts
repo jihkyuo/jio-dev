@@ -22,6 +22,12 @@ export function useActiveHeading(ids: string[]): string {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= probe) current = id;
       }
+      // 바닥에 닿으면 마지막 헤딩을 강제 활성: 끝 섹션 뒤 콘텐츠가
+      // probe(뷰포트 30%)까지 못 올라오는 경우에도 점등되게 한다.
+      const root = document.documentElement;
+      const scrollable = root.scrollHeight > window.innerHeight + 4;
+      const atBottom = window.scrollY + window.innerHeight >= root.scrollHeight - 2;
+      if (scrollable && atBottom) current = ids[ids.length - 1];
       setActiveId(current);
     };
     const onScroll = () => {
