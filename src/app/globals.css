@@ -114,6 +114,16 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 .cs-ref-arrow{opacity:0;transition:opacity .18s}
 .cs-ref:hover .cs-ref-arrow{opacity:1}
 
+/* 인라인 링크 3종 표식(SVG) + hover. 외부=박스화살표(뒤)·다른 글=문서(앞)·앵커=체인(앞). */
+.cs-link{text-decoration-color:color-mix(in srgb,var(--accent) 50%,transparent);transition:color .15s ease,text-decoration-color .15s ease,text-decoration-thickness .15s ease}
+.cs-link:hover{color:color-mix(in srgb,var(--accent) 58%,#fff);text-decoration-color:color-mix(in srgb,var(--accent) 58%,#fff);text-decoration-thickness:2px}
+.cs-link-ic{display:inline-block;width:.9em;height:.9em;vertical-align:-.13em;transition:transform .15s ease}
+.cs-link-ic--lead{margin-right:.1em}
+.cs-link-ic--trail{margin-left:.12em}
+.cs-link--external:hover .cs-link-ic{transform:translate(1.5px,-1.5px)}
+.cs-link--internal:hover .cs-link-ic{transform:scale(1.1)}
+.cs-link--anchor:hover .cs-link-ic{transform:scale(1.1) rotate(-8deg)}
+
 /* 모션 최소화 — 모든 트랜지션/애니메이션 무력화 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
