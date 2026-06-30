@@ -2,15 +2,20 @@
 
 > 작성일 2026-06-30 · 핸드오프 체크리스트
 
-## Phase 1 — 가드레일 (MDX 유지, 즉효)
-- [ ] 신규 테스트 `src/entities/project/api/__tests__/content-guardrail.test.ts`: 모든 `content/projects/*` 본문에 금지 패턴(`import`/`export`/`<script`/`style=`/`className=`/`={`)·미허용 대문자 컴포넌트(허용목록 `Callout`/`Chip`/`Meta`) 없음 단언
-- [ ] 같은 테스트에 "본문 사전 컴파일" 추가(`@mdx-js/mdx` compile 시도 → 실패 시 fail) — 깨진 글을 배포 전 차단(R2)
-- [ ] `package.json` `content:check`가 위 테스트를 포함하는지 확인(현재 `vitest run src/entities`면 자동 포함)
-- [ ] (CI 있으면) 파이프라인에 `pnpm content:check` 추가
-- [ ] 검증: 위반 픽스처로 실패 확인 후 제거 / `pnpm build` 통과
-- [ ] 커밋: `🔧 chore: 콘텐츠 가드레일(content:check) 추가`
+## Phase 1 — 가드레일 (MDX 유지, 즉효) — ✅ 완료(2026-06-30)
+- [x] 신규 테스트 `src/entities/project/api/content-guardrail.test.ts`(컨벤션 따라 `__tests__` 없이 sibling 배치): 모든 `content/projects/*` 본문에 금지 패턴(`import`/`export`/`<script`/`style=`/`className=`/`={`)·미허용 대문자 컴포넌트(허용목록 `Callout`/`Chip`/`Meta`) 없음 단언. **펜스/인라인 코드는 strip 후 검사**(코드 인용 오탐 방지).
+- [x] 같은 테스트에 "본문 사전 컴파일" 추가(`@mdx-js/mdx` compile + remark-gfm → 실패 시 fail) — 깨진 글을 배포 전 차단(R2). `@mdx-js/mdx` devDep 명시 추가.
+- [x] `package.json` `content:check`가 위 테스트를 포함(현재 `vitest run src/entities` → 자동 포함 확인)
+- [x] 위반 검출은 **인라인 픽스처로 증명**(임시 파일 churn 없이) — 위반 7종 + 깨진 MDX 컴파일 실패 단언
+- [x] 검증: `pnpm content:check` 40 그린 / `pnpm lint`·`typecheck`·`build` 통과
+- [ ] (CI 있으면) 파이프라인에 `pnpm content:check` 추가 — **CI 미설정, 보류**
+- [ ] 커밋: `🔧 chore: 콘텐츠 가드레일(content:check) 추가` — 사용자 승인 대기
 
-## Phase 2 — Markdown + remark-directive 이행
+## Phase 2 — Markdown + remark-directive 이행 — ⏸ 보류(YAGNI, 2026-06-30)
+> 결정: 콘텐츠는 AI가 생성하며, repo 밖으로 이식할 수요가 현재 없음. 이식성(b)·WYSIWYG(c)가
+> Phase 2의 주 동기인데 둘 다 지금 불필요 → 보류. 거버넌스는 Phase 1 가드레일로 이미 확보.
+> 재개 조건: 노션/컨플루언스 등 **repo 밖 이식 수요가 실제로 생기면**.
+
 - [ ] 의존성 추가: `remark-directive` `rehype-raw` `rehype-sanitize` (pnpm)
 - [ ] 디렉티브→컴포넌트 remark 플러그인 작성(`:::callout{type}` `::chip[]` `:::meta` `:hl[]`)
 - [ ] `page.tsx`: MDXRemote → 마크다운 렌더러(react-markdown 등). **rehype-slug 유지**, remark-directive/rehype-raw/rehype-sanitize 추가
