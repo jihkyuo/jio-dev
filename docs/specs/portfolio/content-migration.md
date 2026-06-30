@@ -94,7 +94,7 @@
 | 글 | 소스(후보·토픽) | 원자료 | 인터뷰 | 작성 | 발행 |
 |---|---|---|---|---|---|
 | **DnD Sibling-scoped Fractional Rank** | 문진빌더(A)·토픽② | ☑ | ☑ | ☑ | ☑ |
-| DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☐ | ☐ |
+| DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☑ | ☐ |
 | 후속연결 순환탐지(제품 예측+검증 전략) | 문진빌더(A)·토픽③ | ☑ | ☑ | ☐ | ☐ |
 | air-gap 문진 이관·배포 lifecycle | 문진빌더(A)·토픽④ | ☑ | ☑ | ☐ | ☐ |
 | 테스트/품질 인프라 (B) | vd-front·vd-web | ☐ | ☐ | ☐ | ☐ |
