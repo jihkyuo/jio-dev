@@ -4,6 +4,7 @@ import { getProjectBySlug } from "@/entities/project";
 import { ArticlePreviewLink } from "@/shared/ui/ArticlePreviewLink";
 import { classifyHref } from "@/shared/lib/classifyHref";
 import { Callout } from "@/shared/ui/Callout";
+import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { Hl } from "@/shared/ui/Hl";
 import { References, Reference } from "@/shared/ui/References";
 import { HeadingAnchor } from "@/shared/ui/HeadingAnchor";
@@ -146,11 +147,7 @@ export const mdxComponents: Components = {
   code: ({ children }) => (
     <code className="cs-code rounded px-1.5 py-0.5 font-mono text-[0.9em]">{children}</code>
   ),
-  pre: ({ children }) => (
-    <pre className="mb-4 overflow-x-auto rounded bg-card p-4 font-mono text-sm text-body">
-      {children}
-    </pre>
-  ),
+  pre: CodeBlock,
   blockquote: ({ children }) => (
     <blockquote className="cs-blockquote mb-8 rounded-2xl px-5 py-4 text-head [&>p]:mb-0">
       {children}

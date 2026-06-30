@@ -22,14 +22,14 @@ export function TocSidebar({ headings }: { headings: TocHeading[] }) {
           return (
             <li
               key={s.heading.id}
-              className={"transition-opacity duration-300 " + (isOwner ? "opacity-100" : "opacity-40")}
+              className={"transition-opacity duration-300 " + (isOwner ? "opacity-100" : "opacity-70")}
             >
               <a
                 href={`#${s.heading.id}`}
                 aria-current={activeId === s.heading.id ? "location" : undefined}
                 className={
                   "flex items-start gap-2 border-l-2 pl-2.5 py-1.5 leading-snug transition-colors " +
-                  (isOwner ? "border-accent text-head" : "border-transparent text-muted hover:text-body")
+                  (isOwner ? "border-accent text-head" : "border-transparent text-body hover:text-head")
                 }
               >
                 {hasChildren ? (

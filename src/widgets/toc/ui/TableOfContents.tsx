@@ -9,15 +9,15 @@ export function TableOfContents({ headings }: { headings: TocHeading[] }) {
       {/* 좁은 화면: 글 초입 접이식 인라인 목차 */}
       <details
         open
-        className="no-print mb-10 rounded-lg border border-line bg-card px-5 py-4 xl:hidden"
+        className="cs-toc no-print mb-10 rounded-2xl px-5 py-4 xl:hidden"
       >
-        <summary className="cursor-pointer font-mono text-sm font-semibold text-head">
+        <summary className="cursor-pointer font-mono text-xs font-semibold uppercase tracking-wide text-accent">
           목차
         </summary>
         <ul className="mt-3 space-y-2 font-mono text-sm">
           {headings.map((h) => (
             <li key={h.id} className={h.level === 3 ? "pl-3" : ""}>
-              <a href={`#${h.id}`} className="text-muted hover:text-body">
+              <a href={`#${h.id}`} className="text-body transition-colors hover:text-head">
                 {h.text}
               </a>
             </li>

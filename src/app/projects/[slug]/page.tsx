@@ -4,13 +4,34 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import rehypePrettyCode from "rehype-pretty-code";
 import { getProjectSlugs, getProjectContent, getProjectBySlug, type ProjectMeta } from "@/entities/project";
 import { mdxComponents } from "@/shared/ui/mdx";
+import { References, Reference } from "@/shared/ui/References";
 import { extractHeadings } from "@/shared/lib/extractHeadings";
+import { mergeReferences } from "@/shared/lib/mergeReferences";
 import { TableOfContents } from "@/widgets/toc";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
+}
+
+// 제목을 titleHighlight 기준으로 [앞·핵심구·뒤] 형제 span으로 쪼갠다.
+// 핵심구는 스윕 하이라이트(.cs-title-hl), 나머지는 기존 그라데(.cs-title-g).
+// 형제 구조라 부모 clip 중첩이 없어 글자 가장자리 프린징이 생기지 않는다.
+// titleHighlight가 없거나 title에서 못 찾으면 통째로 그라데 한 조각(현 동작과 동일).
+function renderTitle(title: string, highlight?: string) {
+  const at = highlight ? title.indexOf(highlight) : -1;
+  if (at === -1) return <span className="cs-title-g">{title}</span>;
+  const before = title.slice(0, at);
+  const after = title.slice(at + highlight!.length);
+  return (
+    <>
+      {before && <span className="cs-title-g">{before}</span>}
+      <span className="cs-title-hl">{highlight}</span>
+      {after && <span className="cs-title-g">{after}</span>}
+    </>
+  );
 }
 
 export const dynamicParams = false;
@@ -44,6 +65,9 @@ export default async function ProjectPage({
   }
   const { meta, content } = data;
   const headings = extractHeadings(content);
+  // 본문 외부 링크를 자동 레퍼런스로. frontmatter references와 url로 병합해
+  // title/description을 보강한다(없으면 링크 텍스트가 title).
+  const references = mergeReferences(content, meta.references);
   return (
     <main className="relative z-1 mx-auto max-w-2xl px-6 py-16">
       <Link
@@ -58,15 +82,30 @@ export default async function ProjectPage({
         MDX가 5층 골격(case-study-structure.md §4)으로 소유한다. 역할·스택·신뢰 고지는
         글의 메타 줄에 녹는다 — chrome가 따로 strip으로 중복 렌더하지 않는다.
       */}
-      <h1 className="cs-title mb-4 text-3xl font-extrabold leading-tight bg-gradient-to-r from-head to-accent bg-clip-text text-transparent">{meta.title}</h1>
+      <h1 className="cs-title mb-4 text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.02em]">{renderTitle(meta.title, meta.titleHighlight)}</h1>
 
       <TableOfContents headings={headings} />
 
       <MDXRemote
         source={content}
         components={mdxComponents}
-        options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeSlug, [rehypePrettyCode, { theme: "one-dark-pro" }]],
+          },
+        }}
       />
+
+      {references.length > 0 && (
+        <References>
+          {references.map((r) => (
+            <Reference key={r.url} href={r.url} title={r.title}>
+              {r.description}
+            </Reference>
+          ))}
+        </References>
+      )}
     </main>
   );
 }

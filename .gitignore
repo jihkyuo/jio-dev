@@ -46,3 +46,6 @@ next-env.d.ts
 
 # codex CLI 세션 아티팩트
 .context/
+
+# 디자인 실험·임시 작업물
+scratchpad/

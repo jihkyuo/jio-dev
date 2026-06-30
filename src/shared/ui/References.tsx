@@ -11,7 +11,12 @@ function hostnameOf(href: string): string {
 }
 
 export function References({ children }: { children: ReactNode }) {
-  return <div className="cs-refs mb-8 flex flex-col gap-3">{children}</div>;
+  return (
+    <section className="mt-12 mb-8">
+      <h2 className="cs-h2 mb-4 text-2xl font-bold text-head">레퍼런스</h2>
+      <div className="cs-refs flex flex-col gap-3">{children}</div>
+    </section>
+  );
 }
 
 export function Reference({
