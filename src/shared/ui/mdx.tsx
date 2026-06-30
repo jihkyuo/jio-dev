@@ -1,4 +1,5 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import Link from "next/link";
 import { Callout } from "@/shared/ui/Callout";
 import { Hl } from "@/shared/ui/Hl";
 import { References, Reference } from "@/shared/ui/References";
@@ -97,15 +98,24 @@ export const mdxComponents: Components = {
   a: ({ href, children }) => {
     const h = href ?? "";
     const kind = h.startsWith("http") ? "external" : h.startsWith("#") ? "anchor" : "internal";
-    const newTab = kind === "external" || kind === "internal";
+    const className = `cs-link cs-link--${kind} text-accent underline underline-offset-2 visited:text-accent/70`;
+    // 같은 사이트 다른 글 = next/link 소프트 내비게이션(같은 탭). 문서 아이콘(앞).
+    if (kind === "internal") {
+      return (
+        <Link href={h} className={className}>
+          <ArticleIcon />
+          {children}
+        </Link>
+      );
+    }
+    // 외부(http) = 새 탭·박스화살표(뒤) / 글 내부 앵커(#) = 같은 탭·체인(앞).
     return (
       <a
         href={href}
-        className={`cs-link cs-link--${kind} text-accent underline underline-offset-2 visited:text-accent/70`}
-        target={newTab ? "_blank" : undefined}
-        rel={newTab ? "noopener noreferrer" : undefined}
+        className={className}
+        target={kind === "external" ? "_blank" : undefined}
+        rel={kind === "external" ? "noopener noreferrer" : undefined}
       >
-        {kind === "internal" && <ArticleIcon />}
         {kind === "anchor" && <AnchorIcon />}
         {children}
         {kind === "external" && <ExternalIcon />}
