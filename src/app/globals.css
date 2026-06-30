@@ -105,6 +105,15 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 .cs-table-wrap td{border:none;border-bottom:1px solid color-mix(in srgb,#fff 8%,transparent);padding:.85rem 1.1rem;vertical-align:top;line-height:1.6;color:var(--body)}
 .cs-table-wrap tr:last-child td{border-bottom:none}
 .cs-table-wrap td:first-child{white-space:nowrap;font-family:var(--font-mono);font-weight:600;color:var(--accent)}
+/* 모바일: 2열 표는 reflow가 안 돼 가로 스크롤·압착이 생긴다 → 세로 스택으로 변형.
+   라벨(첫 칸)은 본문 위 강조 헤더로 올리고, 행 사이는 구분선으로 가른다. 빈 헤더는 계속 숨김. */
+@media (max-width:640px){
+  .cs-table-wrap table,.cs-table-wrap thead,.cs-table-wrap tbody,.cs-table-wrap tr,.cs-table-wrap th,.cs-table-wrap td{display:block;width:100%}
+  .cs-table-wrap tr{padding:.9rem 0}
+  .cs-table-wrap tr+tr{border-top:1px solid color-mix(in srgb,#fff 8%,transparent)}
+  .cs-table-wrap td{border-bottom:none;padding:.2rem 1.1rem;overflow-wrap:break-word}
+  .cs-table-wrap td:first-child{white-space:normal;margin-bottom:.15rem}
+}
 
 .cs-callout{--c:var(--accent);border:1px solid color-mix(in srgb,var(--c) 34%,transparent);background:color-mix(in srgb,var(--c) 22%,color-mix(in srgb,var(--card) 40%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.3),0 1px 0 color-mix(in srgb,var(--c) 45%,transparent) inset}
 .cs-note{--c:var(--note)}
