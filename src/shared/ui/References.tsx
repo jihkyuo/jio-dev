@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { ExternalLinkIcon } from "@/shared/ui/LinkIcons";
 
 // MDX 콘텐츠는 런타임 데이터라 잘못된 URL이 들어올 수 있다.
 // 도메인 도출 실패 시 빈 문자열로 폴백해 렌더를 깨뜨리지 않는다.
@@ -46,7 +45,9 @@ export function Reference({
       <span className="flex min-w-0 flex-col gap-1">
         <span className="flex items-center gap-1 font-semibold text-head">
           {title}
-          <ExternalLinkIcon className="cs-ref-arrow" />
+          <span aria-hidden className="cs-ref-arrow">
+            ↗
+          </span>
         </span>
         {children ? <span className="text-sm leading-relaxed text-body">{children}</span> : null}
         {host ? <span className="font-mono text-xs text-muted">{host}</span> : null}

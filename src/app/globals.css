@@ -111,8 +111,8 @@ pre .cs-code{background:none;border:0;padding:0;color:inherit}
 .cs-ref{border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 8%,color-mix(in srgb,var(--card) 42%,transparent));backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.26);transition:border-color .18s,transform .18s,box-shadow .18s}
 .cs-ref:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent);transform:translateY(-1px);box-shadow:0 12px 36px rgba(0,0,0,.34)}
 .cs-ref-icon{border:1px solid color-mix(in srgb,#fff 12%,transparent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
-.cs-ref-arrow{width:.95em;height:.95em;flex:none;color:var(--muted);transition:color .18s,transform .18s}
-.cs-ref:hover .cs-ref-arrow{color:var(--accent);transform:translate(1.5px,-1.5px)}
+.cs-ref-arrow{opacity:0;transition:opacity .18s}
+.cs-ref:hover .cs-ref-arrow{opacity:1}
 
 /* 인라인 링크 3종 표식(SVG) + hover. 외부=박스화살표(뒤)·다른 글=문서(앞)·앵커=체인(앞). */
 .cs-link{text-decoration-color:color-mix(in srgb,var(--accent) 50%,transparent);transition:color .15s ease,text-decoration-color .15s ease,text-decoration-thickness .15s ease}
