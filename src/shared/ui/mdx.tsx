@@ -45,7 +45,7 @@ export const mdxComponents: Components = {
   ),
   li: ({ children }) => (
     <li className="flex gap-2 text-body">
-      <span className="mt-0.5 shrink-0 text-accent">▹</span>
+      <span aria-hidden="true" className="mt-0.5 shrink-0 text-accent">▹</span>
       <span>{children}</span>
     </li>
   ),
@@ -54,7 +54,7 @@ export const mdxComponents: Components = {
       href={href}
       className="text-accent underline underline-offset-2"
       target={href?.startsWith("http") ? "_blank" : undefined}
-      rel={href?.startsWith("http") ? "noreferrer" : undefined}
+      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
     >
       {children}
     </a>

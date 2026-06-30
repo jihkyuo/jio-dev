@@ -30,11 +30,13 @@ function loadAll(): ProjectMeta[] {
 }
 
 export function getProjects(): ProjectMeta[] {
-  return loadAll().sort(
-    (a, b) =>
+  return loadAll().sort((a, b) => {
+    const byOrder =
       (a.order ?? Number.MAX_SAFE_INTEGER) -
-      (b.order ?? Number.MAX_SAFE_INTEGER),
-  );
+      (b.order ?? Number.MAX_SAFE_INTEGER);
+    // 같은 order면 slug로 결정적 정렬(파일시스템 순서 의존 제거).
+    return byOrder !== 0 ? byOrder : a.slug.localeCompare(b.slug);
+  });
 }
 
 export function getProjectSlugs(): string[] {
