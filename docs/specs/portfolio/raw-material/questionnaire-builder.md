@@ -43,6 +43,33 @@
 
 ---
 
+### ★ 2026-06-30 정정 — vd-front 코드 직접 재파악 + 2차 인터뷰 (설계 중심 재정립)
+
+> 글쓰기(4단계) 전에 vd-front 코드·git·설계문서를 **직접 재파악**하고 2차 인터뷰함. 아래가 §1 폼을 갱신·정정한다. **이 글의 어필은 "마이그레이션"이 아니라 "설계"다.** 원문은 [interview](./questionnaire-builder-interview.md) 토픽① 2차.
+
+**★ 어필 재정립 (codex 교차검증 ×2):**
+- **금메달 = 설계 결정 "key 주소 불변 드래프트 트리".** 문진을 비정규화 keyed 트리 draft로 들고 immer로 변형, **structural sharing이 구독·dirty·undo의 공통 경계**가 되게 함. [확정·IV]
+- **불변성을 아키텍처 계약으로** — 한 설계 결정이 5기능 동시 성립: ① 노드 단위 부분구독(형제 참조 보존) ② dirty=서버 baseline 비교 ③ undo=questions/categories만 스냅샷 ④ validation=derived(stored 아님) ⑤ recovery=baseline 오염 없이 merge. = "불변객체 강력함을 기능단에서 입증".
+- 동적 폼(필드 추가·삭제·다양한 형식·5층 트리)엔 정적 제출폼 모델(RHF)이 핏 안 맞음 → immer+Zustand+undo 조합 설계가 강력. CS 기본기(불변·프록시·구조적 공유·경로 복사·자료구조)가 설계 깊이를 떠받침 → "시니어=기본기" 체득. 관통 정체성 = "구현 전 설계에 가장 많은 고민·시간".
+- 마이그레이션(평행 재구현·QA 게이트·가역 라우터 스왑·잎→뿌리 삭제)은 설계를 안전하게 안착시킨 **실행**으로 부차.
+
+**정정 (N1~N9):**
+- **N1 RHF 한계**: "blur 강등"은 텍스트 입력 한정(선택형은 onChange 유지). 실시간 표시 자체는 작동. 진짜 균열 = isDirty가 Controller 텍스트 편집 추적 못함(#4597) → **저장버튼 disabled 못걸어 항상 활성 → 사용자 변경여부 모름 → 저장 눌러 유효성 반강제**. [확정·IV]
+- **N2 결정타**: isDirty는 방아쇠, 근본 = 동적 트리+영속화+undo가 폼-제출 모델과 불일치. [확정·IV]
+- **N3 버린 대안**: deep-compare 우회(isEqual) — 떠올렸으나 코드화 전 분석서 접음(이유=근본 메커니즘 거부 억지달성 부채). 단 **새 스토어 dirty도 baseline 대비 bounded deep-compare 씀**(structural sharing). 글엔 "RHF 위 우회는 버림 / 새 스토어는 비용 묶은 deep-compare". [확정·IV+codex]
+- **N4 AI 오너십**: 핵심 설계 **제안=AI**, 비교분석·검증·확정=본인. Zustand+immer 이유=이탈방지·undo 커버+immer 연동성 최적조건(이미쓰던건 덤). 생소한 immer를 7문제 Notion 회고로 토대까지 검증. [확정·IV]
+- **N5 persist 동기 write**: 매 controlled onChange(IME 가드 없음)마다 localStorage 전체 덮어쓰기, 디바운스는 undo(temporal)에만. 본인 기억 가물가물·체감 비용 없음. 글엔 과장 없이 "손실 0 우선, 디바운스 미적용 후속". [미확인—측정 없음]
+- **N6 오너십**: 빌더 기능 **100% 단독**. AI=설계후보 제안. QA팀=개발빌드 받아 최종 검증 게이트, 자체 QA 수시. [확정·IV]
+- **N7 ★톤**: "RHF 청산/14k 자랑" ❌ → "빌더에 핏 안 맞아 **이 도메인만** 재설계". RHF는 타 도메인서 잘 씀(문제는 RHF 아니라 핏). [확정·IV]
+- **N8 회귀검증**: 196 테스트 + 동등성 하니스(데이터 자동) + **본인 기능별 육안**(도메인 제작자라 부정합 빠르게 파악) + QA팀 게이트. 스크린샷 자동 비교는 안 함. 글엔 "발견된 회귀 0". [확정·IV]
+- **N9 자가감사**: 평행 재구현(처음부터 다시 구현)이 꼼꼼한 재점검을 유발 → 누락 스스로 잡음. 구체 항목은 미기억. [확정·IV / 세부 미확인]
+
+**codex 과장 주의 (글에서 절제):** "RHF가 동적폼 근본 불가" 절대화 금지 → "이 화면 요구에 핏 안 맞음" · "형제 리렌더 0" → "참조 보존" · "검증 SSOT"는 domain leaf 룰만(save=zod schema, flow=flowGraph 별도) · "CS 기본기"는 applied engineering 톤(algorithmic research ❌).
+
+**코드 검증 수치(실측):** `temporal(persist(immer(slices)))` 9슬라이스 · 13 도메인룰(`collectQuestionDomainViolations`) · 도메인 테스트 196 · 도메인 코드 RHF import 0 · RHF 삭제 누적 ~14,000줄(핵심 커밋 합산 −13,898+). 정확 인용 필요 시 vd-front 재-grep(§4.2).
+
+---
+
 ## 2. 딥다이브 #2 — DnD rank 설계 (fractional-indexing)
 
 ### §9.1 폼
