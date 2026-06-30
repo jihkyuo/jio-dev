@@ -1,5 +1,8 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import Link from "next/link";
+import { getProjectBySlug } from "@/entities/project";
+import { ArticlePreviewLink } from "@/shared/ui/ArticlePreviewLink";
+import { classifyHref } from "@/shared/lib/classifyHref";
 import { Callout } from "@/shared/ui/Callout";
 import { Hl } from "@/shared/ui/Hl";
 import { References, Reference } from "@/shared/ui/References";
@@ -97,10 +100,25 @@ export const mdxComponents: Components = {
   // 글 내부 앵커(#…) = 체인(앞)·같은 탭(부드러운 스크롤).
   a: ({ href, children }) => {
     const h = href ?? "";
-    const kind = h.startsWith("http") ? "external" : h.startsWith("#") ? "anchor" : "internal";
+    const kind = classifyHref(href);
     const className = `cs-link cs-link--${kind} text-accent underline underline-offset-2 visited:text-accent/70`;
     // 같은 사이트 다른 글 = next/link 소프트 내비게이션(같은 탭). 문서 아이콘(앞).
+    // 대상 글 메타가 있으면 hover 프리뷰 카드로 감싼다(추가 fetch 0 — frontmatter 재사용).
     if (kind === "internal") {
+      const slug = h.replace(/^\/projects\//, "").split(/[#?]/)[0];
+      const meta = getProjectBySlug(slug);
+      if (meta) {
+        return (
+          <ArticlePreviewLink
+            href={h}
+            className={className}
+            icon={<ArticleIcon />}
+            preview={{ title: meta.title, impact: meta.impact, stack: meta.stack, period: meta.period }}
+          >
+            {children}
+          </ArticlePreviewLink>
+        );
+      }
       return (
         <Link href={h} className={className}>
           <ArticleIcon />
