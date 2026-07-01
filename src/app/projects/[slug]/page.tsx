@@ -10,6 +10,7 @@ import { References, Reference } from "@/shared/ui/References";
 import { extractHeadings } from "@/shared/lib/extractHeadings";
 import { mergeReferences } from "@/shared/lib/mergeReferences";
 import { splitLeadSummaryBody } from "@/shared/lib/splitLeadAndBody";
+import { rehypeUnwrapImages } from "@/shared/lib/rehypeUnwrapImages";
 import { TableOfContents } from "@/widgets/toc";
 import { BackLink } from "./BackLink";
 
@@ -80,7 +81,7 @@ export default async function ProjectPage({
   const mdxOptions: MDXRemoteProps["options"] = {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeSlug, [rehypePrettyCode, { theme: "one-dark-pro" }]],
+      rehypePlugins: [rehypeUnwrapImages, rehypeSlug, [rehypePrettyCode, { theme: "one-dark-pro" }]],
     },
   };
   return (
