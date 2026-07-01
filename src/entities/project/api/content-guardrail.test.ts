@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { readdirSync, existsSync, readFileSync } from "node:fs";
+import { join, basename } from "node:path";
 import { compile } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
 import { getProjectContent } from "./getProjects";
@@ -60,6 +60,37 @@ function findViolations(body: string): string[] {
 const compileBody = (body: string) =>
   compile(body, { remarkPlugins: [remarkGfm] });
 
+// R3 다이어그램 자산 헬퍼 — 본문 마크다운 이미지의 src를 뽑는다(코드 영역 제외).
+function extractImageSrcs(body: string): string[] {
+  const prose = stripCode(body);
+  const out: string[] = [];
+  for (const m of prose.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) out.push(m[1]);
+  return out;
+}
+
+// 참조 규칙: 로컬 /projects/<slug>-….svg 만 허용(원격·래스터·타 경로·타 slug 거부).
+function findImageRefViolations(body: string, slug: string): string[] {
+  const out: string[] = [];
+  for (const src of extractImageSrcs(body)) {
+    if (/^(https?:)?\/\//.test(src)) { out.push("원격 이미지 URL"); continue; }
+    if (!src.startsWith("/projects/")) { out.push("이미지 경로가 /projects/ 아님"); continue; }
+    if (!src.endsWith(".svg")) { out.push("래스터 이미지(.svg만 허용)"); continue; }
+    const name = basename(src);
+    if (!name.startsWith(`${slug}-`) && name !== `${slug}.svg`) out.push("파일명이 글 slug로 시작 안 함");
+  }
+  return out;
+}
+
+// SVG 안전성: 스크립트·foreignObject·외부 href·래스터 <image>는 개념도에 있을 수 없다.
+function findSvgAssetViolations(svg: string): string[] {
+  const out: string[] = [];
+  if (/<script[\s>]/i.test(svg)) out.push("SVG <script>");
+  if (/<foreignObject[\s>]/i.test(svg)) out.push("SVG <foreignObject>");
+  if (/(?:xlink:)?href\s*=\s*["']\s*https?:/i.test(svg)) out.push("SVG 외부 href");
+  if (/<image[\s>]/i.test(svg)) out.push("SVG 래스터 <image>");
+  return out;
+}
+
 describe("content guardrail — 실제 콘텐츠(R1·R2)", () => {
   it("검사할 콘텐츠가 1개 이상 발견된다(가드레일 무력화 방지)", () => {
     // it.each([])는 0개 테스트를 등록해 공허하게 통과한다 — 글롭/경로가 깨져
@@ -108,5 +139,60 @@ describe("content guardrail — 위반 검출 증명(R1)", () => {
 describe("content guardrail — 깨진 본문 검출 증명(R2)", () => {
   it("닫히지 않은 JSX 태그는 컴파일에 실패한다", async () => {
     await expect(compileBody("## 제목\n\n<Callout type=\"note\">닫지 않음")).rejects.toThrow();
+  });
+});
+
+// R3 — 다이어그램 자산 규율(case-study-structure.md §4.6). 손으로 그린 SVG 개념도만
+// 허용하고(스크린샷 금지·보안), 경로·확장자·slug 접두·존재·SVG 안전성을 강제한다.
+// 문서 규칙만으론 약해 자동 테스트로 강제한다(codex 교차검증 지시).
+const PUBLIC_DIR = join(process.cwd(), "public");
+
+describe("content guardrail — 다이어그램 자산 규율(R3)", () => {
+  // 참조 규칙 위반 검출 증명(순수 — fs 무관)
+  const badRefs: [label: string, body: string, slug: string][] = [
+    ["원격 이미지 URL", "본문\n\n![도형](https://evil.com/x.svg)", "foo"],
+    ["래스터 이미지(.svg만 허용)", "본문\n\n![도형](/projects/foo-x.png)", "foo"],
+    ["이미지 경로가 /projects/ 아님", "본문\n\n![도형](/img/foo-x.svg)", "foo"],
+    ["파일명이 글 slug로 시작 안 함", "본문\n\n![도형](/projects/other-x.svg)", "foo"],
+  ];
+  it.each(badRefs)("참조 위반(%s)을 잡는다", (label, body, slug) => {
+    expect(findImageRefViolations(body, slug)).toContain(label);
+  });
+
+  it("규칙에 맞는 마크다운 이미지는 위반이 아니다", () => {
+    expect(findImageRefViolations("본문\n\n![도형](/projects/foo-bar.svg)", "foo")).toEqual([]);
+  });
+
+  it("이미지 없는 본문은 위반이 아니다", () => {
+    expect(findImageRefViolations("그림 없는 글", "foo")).toEqual([]);
+  });
+
+  // SVG 안전성 위반 검출 증명(순수 — fs 무관)
+  const badSvgs: [label: string, svg: string][] = [
+    ["SVG <script>", '<svg><script>alert(1)</script></svg>'],
+    ["SVG <foreignObject>", '<svg><foreignObject><div/></foreignObject></svg>'],
+    ["SVG 외부 href", '<svg><image xlink:href="https://evil.com/a.png"/></svg>'],
+    ["SVG 래스터 <image>", '<svg><image href="data:image/png;base64,AAA"/></svg>'],
+  ];
+  it.each(badSvgs)("SVG 위반(%s)을 잡는다", (label, svg) => {
+    expect(findSvgAssetViolations(svg)).toContain(label);
+  });
+
+  it("안전한 기하 SVG는 위반이 아니다", () => {
+    const safe = '<svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8"/><text>a</text></svg>';
+    expect(findSvgAssetViolations(safe)).toEqual([]);
+  });
+
+  // 실제 콘텐츠 통합: 참조 규칙 + 존재 + SVG 안전성
+  it.each(slugsFromDisk)("'%s' 본문 이미지가 자산 규율을 지킨다", (slug) => {
+    const { content } = getProjectContent(slug);
+    expect(findImageRefViolations(content, slug)).toEqual([]);
+    for (const src of extractImageSrcs(content)) {
+      const abs = join(PUBLIC_DIR, src);
+      expect(existsSync(abs), `없는 이미지: ${src}`).toBe(true);
+      if (existsSync(abs)) {
+        expect(findSvgAssetViolations(readFileSync(abs, "utf8")), `안전하지 않은 SVG: ${src}`).toEqual([]);
+      }
+    }
   });
 });

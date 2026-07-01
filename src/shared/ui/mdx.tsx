@@ -87,6 +87,15 @@ export const mdxComponents: Components = {
       {children}
     </p>
   ),
+  // 개념도/설계도. 마크다운 이미지(![alt](src))가 여기로 온다 — alt를 캡션으로 쓴다.
+  // 캡션이 곧 대체텍스트라 스크린리더 중복을 피하려 img alt는 비운다(figcaption이 설명).
+  img: ({ src, alt }) => (
+    <figure className="my-8">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={typeof src === "string" ? src : ""} alt="" className="mx-auto block w-full rounded-xl border border-line" />
+      {alt && <figcaption className="mt-3 text-center text-sm leading-relaxed text-muted">{alt}</figcaption>}
+    </figure>
+  ),
   ul: ({ children }) => (
     <ul className="mb-4 space-y-2">{children}</ul>
   ),
