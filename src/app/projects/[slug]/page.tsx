@@ -11,29 +11,12 @@ import { extractHeadings } from "@/shared/lib/extractHeadings";
 import { mergeReferences } from "@/shared/lib/mergeReferences";
 import { splitLeadSummaryBody } from "@/shared/lib/splitLeadAndBody";
 import { rehypeUnwrapImages } from "@/shared/lib/rehypeUnwrapImages";
+import { renderHighlightedText } from "@/shared/ui/renderHighlightedText";
 import { TableOfContents } from "@/widgets/toc";
 import { BackLink } from "./BackLink";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
-}
-
-// 제목을 titleHighlight 기준으로 [앞·핵심구·뒤] 형제 span으로 쪼갠다.
-// 핵심구는 스윕 하이라이트(.cs-title-hl), 나머지는 기존 그라데(.cs-title-g).
-// 형제 구조라 부모 clip 중첩이 없어 글자 가장자리 프린징이 생기지 않는다.
-// titleHighlight가 없거나 title에서 못 찾으면 통째로 그라데 한 조각(현 동작과 동일).
-function renderTitle(title: string, highlight?: string) {
-  const at = highlight ? title.indexOf(highlight) : -1;
-  if (at === -1) return <span className="cs-title-g">{title}</span>;
-  const before = title.slice(0, at);
-  const after = title.slice(at + highlight!.length);
-  return (
-    <>
-      {before && <span className="cs-title-g">{before}</span>}
-      <span className="cs-title-hl">{highlight}</span>
-      {after && <span className="cs-title-g">{after}</span>}
-    </>
-  );
 }
 
 export const dynamicParams = false;
@@ -93,7 +76,7 @@ export default async function ProjectPage({
         MDX가 5층 골격(case-study-structure.md §4)으로 소유한다. 역할·스택·신뢰 고지는
         글의 메타 줄에 녹는다 — chrome가 따로 strip으로 중복 렌더하지 않는다.
       */}
-      <h1 className="cs-title mb-3 text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.02em]">{renderTitle(meta.title, meta.titleHighlight)}</h1>
+      <h1 className="cs-title mb-3 text-[clamp(1.75rem,5vw,3rem)] font-extrabold leading-[1.12] tracking-[-0.02em]">{renderHighlightedText(meta.title, meta.titleHighlight, { baseClassName: "cs-title-g", highlightClassName: "cs-title-hl" })}</h1>
 
       {/*
         impact 아웃컴 deck — 0초 스캐너가 제목(토픽) 다음 결과 verdict를 바로 잡게 한다.

@@ -123,7 +123,7 @@ export const mdxComponents: Components = {
             href={h}
             className={className}
             icon={<ArticleIcon />}
-            preview={{ title: meta.title, impact: meta.impact, stack: meta.stack, period: meta.period }}
+            preview={{ title: meta.title, titleHighlight: meta.titleHighlight, impact: meta.impact, stack: meta.stack, period: meta.period }}
           >
             {children}
           </ArticlePreviewLink>

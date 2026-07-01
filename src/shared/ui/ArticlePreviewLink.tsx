@@ -4,8 +4,9 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { computePreviewPosition } from "@/shared/lib/previewPosition";
+import { renderHighlightedText } from "@/shared/ui/renderHighlightedText";
 
-type Preview = { title: string; impact: string; stack: string[]; period: string };
+type Preview = { title: string; titleHighlight?: string; impact: string; stack: string[]; period: string };
 
 type Props = {
   href: string;
@@ -184,7 +185,9 @@ export function ArticlePreviewLink({ href, className, icon, preview, children }:
             onPointerLeave={canHover ? scheduleClose : undefined}
           >
             <span className="cs-preview-kicker">다른 글</span>
-            <span className="cs-preview-title">{preview.title}</span>
+            <span className="cs-preview-title">
+              {renderHighlightedText(preview.title, preview.titleHighlight, { highlightClassName: "cs-title-hl" })}
+            </span>
             <span className="cs-preview-impact">{preview.impact}</span>
             {preview.stack.length > 0 && (
               <span className="cs-preview-stack">
