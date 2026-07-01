@@ -1,31 +1,50 @@
-<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" role="img" aria-label="문항 2를 편집하면 그 노드와 조상(root)만 새 객체가 되고, 형제 가지는 옛 객체를 그대로 공유한다">
-  <rect x="0.5" y="0.5" width="639" height="329" rx="18" fill="#101216" stroke="#1e222a"/>
+<svg viewBox="0 0 680 410" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" role="img" aria-label="문항 하나를 편집하면 그 문항에서 분류·문진(root)까지의 경로만 새 객체가 되고, 각 층의 형제 가지는 옛 객체를 그대로 공유한다">
+  <rect x="0.5" y="0.5" width="679" height="409" rx="18" fill="#101216" stroke="#1e222a"/>
 
-  <text x="320" y="42" text-anchor="middle" fill="#7e8593" font-size="12.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="0.5">문항 2 편집 · 구조적 공유</text>
+  <text x="340" y="40" text-anchor="middle" fill="#7e8593" font-size="12.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">문항 하나 편집 · 경로만 새 객체 (구조적 공유)</text>
 
-  <!-- edges -->
-  <path d="M296 100 L168 168" stroke="#333a46" stroke-width="1.5" fill="none"/>
-  <path d="M320 102 L320 168" stroke="#7e9cd4" stroke-width="1.6" fill="none"/>
-  <path d="M344 100 L472 168" stroke="#333a46" stroke-width="1.5" fill="none"/>
+  <!-- edges (선 먼저, 노드 나중) -->
+  <path d="M340 78 L150 190" stroke="#333a46" stroke-width="1.5" fill="none"/>
+  <path d="M340 78 L340 190" stroke="#7e9cd4" stroke-width="1.7" fill="none"/>
+  <path d="M340 78 L530 190" stroke="#333a46" stroke-width="1.5" fill="none"/>
+  <path d="M340 190 L252 302" stroke="#333a46" stroke-width="1.5" fill="none"/>
+  <path d="M340 190 L340 302" stroke="#7e9cd4" stroke-width="1.7" fill="none"/>
+  <path d="M340 190 L428 302" stroke="#333a46" stroke-width="1.5" fill="none"/>
 
-  <!-- root (new) -->
-  <circle cx="320" cy="82" r="30" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.8"/>
-  <text x="320" y="87" text-anchor="middle" fill="#8fb0ec" font-size="14" font-weight="600">root ′</text>
+  <!-- 공유 subtree 암시: 분류 A·C 아래 짧은 stub + 점 -->
+  <path d="M150 208 L132 246" stroke="#2a2f3a" stroke-width="1.3" fill="none"/>
+  <path d="M150 208 L168 246" stroke="#2a2f3a" stroke-width="1.3" fill="none"/>
+  <circle cx="132" cy="250" r="4" fill="#242a34"/>
+  <circle cx="168" cy="250" r="4" fill="#242a34"/>
+  <path d="M530 208 L512 246" stroke="#2a2f3a" stroke-width="1.3" fill="none"/>
+  <path d="M530 208 L548 246" stroke="#2a2f3a" stroke-width="1.3" fill="none"/>
+  <circle cx="512" cy="250" r="4" fill="#242a34"/>
+  <circle cx="548" cy="250" r="4" fill="#242a34"/>
 
-  <!-- 문항1 (shared) -->
-  <circle cx="140" cy="198" r="32" fill="none" stroke="#333a46" stroke-width="1.5"/>
-  <text x="140" y="203" text-anchor="middle" fill="#7e8593" font-size="13">문항 1</text>
-  <!-- 문항2 (new) -->
-  <circle cx="320" cy="198" r="32" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.8"/>
-  <text x="320" y="203" text-anchor="middle" fill="#8fb0ec" font-size="13" font-weight="600">문항 2 ′</text>
-  <!-- 문항3 (shared) -->
-  <circle cx="500" cy="198" r="32" fill="none" stroke="#333a46" stroke-width="1.5"/>
-  <text x="500" y="203" text-anchor="middle" fill="#7e8593" font-size="13">문항 3</text>
+  <!-- L1 문진(root) — 새 객체 -->
+  <circle cx="340" cy="78" r="28" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.8"/>
+  <text x="340" y="83" text-anchor="middle" fill="#8fb0ec" font-size="13.5" font-weight="600">문진 ′</text>
 
-  <!-- node captions -->
-  <text x="140" y="256" text-anchor="middle" fill="#7e8593" font-size="12">옛 객체 공유</text>
-  <text x="320" y="256" text-anchor="middle" fill="#8fb0ec" font-size="12">새 객체</text>
-  <text x="500" y="256" text-anchor="middle" fill="#7e8593" font-size="12">옛 객체 공유</text>
+  <!-- L2 분류 -->
+  <circle cx="150" cy="190" r="28" fill="none" stroke="#333a46" stroke-width="1.5"/>
+  <text x="150" y="195" text-anchor="middle" fill="#7e8593" font-size="13">분류 A</text>
+  <circle cx="340" cy="190" r="28" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.8"/>
+  <text x="340" y="195" text-anchor="middle" fill="#8fb0ec" font-size="13" font-weight="600">분류 B ′</text>
+  <circle cx="530" cy="190" r="28" fill="none" stroke="#333a46" stroke-width="1.5"/>
+  <text x="530" y="195" text-anchor="middle" fill="#7e8593" font-size="13">분류 C</text>
 
-  <text x="320" y="298" text-anchor="middle" fill="#b7bdc8" font-size="13">편집된 노드와 조상만 새로 나고, 형제는 리렌더되지 않는다</text>
+  <!-- L3 문항 (분류 B의 자식) -->
+  <circle cx="252" cy="302" r="26" fill="none" stroke="#333a46" stroke-width="1.5"/>
+  <text x="252" y="307" text-anchor="middle" fill="#7e8593" font-size="12.5">문항</text>
+  <circle cx="340" cy="302" r="26" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.8"/>
+  <text x="340" y="307" text-anchor="middle" fill="#8fb0ec" font-size="12.5" font-weight="600">문항 ′</text>
+  <circle cx="428" cy="302" r="26" fill="none" stroke="#333a46" stroke-width="1.5"/>
+  <text x="428" y="307" text-anchor="middle" fill="#7e8593" font-size="12.5">문항</text>
+  <text x="340" y="348" text-anchor="middle" fill="#8fb0ec" font-size="11.5">▲ 편집한 노드</text>
+
+  <!-- legend -->
+  <circle cx="150" cy="372" r="7" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.6"/>
+  <text x="164" y="376" fill="#b7bdc8" font-size="12.5">편집 → root 경로 = 새 객체</text>
+  <circle cx="392" cy="372" r="7" fill="none" stroke="#333a46" stroke-width="1.5"/>
+  <text x="406" y="376" fill="#b7bdc8" font-size="12.5">형제 가지 = 옛 객체 그대로 공유</text>
 </svg>
