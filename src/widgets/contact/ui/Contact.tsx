@@ -8,10 +8,9 @@ export function Contact() {
         Contact
       </h2>
       <hr className="mt-2 mb-8 border-line" />
-      {/* 사용자가 실제 연락 안내로 교체 */}
       <p className="mb-8 text-body leading-relaxed">
-        새로운 기회나 협업 제안이 있으시면 편하게 연락주세요. 이메일이 가장
-        빠르게 닿습니다.
+        새로운 문제와 좋은 팀을 찾고 있습니다. 기회나 협업 제안이 있으시면 편하게
+        연락주세요 — 이메일이 가장 빠르게 닿습니다.
       </p>
       <div className="flex flex-wrap gap-3">
         <a
@@ -22,8 +21,7 @@ export function Contact() {
         </a>
         <a
           href={profile.resumePdf}
-          target="_blank"
-          rel="noreferrer"
+          download="프론트엔드 개발자 지오현.pdf"
           className="rounded border border-line px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/50 hover:text-head"
         >
           이력서 PDF ↓
@@ -36,14 +34,16 @@ export function Contact() {
         >
           GitHub ↗
         </a>
-        <a
-          href={profile.links.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded border border-line px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/50 hover:text-head"
-        >
-          LinkedIn ↗
-        </a>
+        {profile.links.linkedin && (
+          <a
+            href={profile.links.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded border border-line px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/50 hover:text-head"
+          >
+            LinkedIn ↗
+          </a>
+        )}
       </div>
     </section>
   );

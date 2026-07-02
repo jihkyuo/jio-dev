@@ -49,13 +49,15 @@
                       산출 ▶ ① jio.dev `raw-material/<slug>.md` 빈칸 채움(합성)
                            + ② jio.dev `raw-material/<slug>-interview.md` 사용자 답변 원문(verbatim) 저장  ★마스킹 필수(§4.1)
 4. 골격대로 작성    — case-study-structure.md 5층 골격으로 재작성.  산출 ▶ jio.dev `content/projects/<slug>.mdx`(처음부터 일반화)
-5. 자가검증        — ★**제목·구조 안을 §5 체크리스트·§9.2 루브릭 자가검증 + `/codex` 교차검증**(제목 숫자·과대명명 금지, 결과 방어력 필수). + §8 30초 스킴. 미달이면 4로.
+4.5 다이어그램 판단·제작 — §4.6 figure thesis 킬룰로 그림 필요/불필요 **최종 판단**(불필요도 1급 출력 — §9.1에 근거 기록). 필요 시 diagram-style.md 하우스 스타일 SVG 제작 → 해당 산문 옆 삽입.  산출 ▶ jio.dev `public/projects/<slug>-<개념>.svg` + 본문 `![캡션](/projects/…svg)`
+5. 자가검증        — ★**제목·구조 안을 §5 체크리스트·§9.2 루브릭 자가검증 + `/codex` 교차검증**(제목 숫자·과대명명 금지, 결과 방어력 필수). + §8 30초 스킴 + `content:check`(R3 그림 자산). 미달이면 4로.
 6. jio.dev 커밋     — 초안을 jio.dev 정상 커밋(공개 — 마스킹/일반화 확인).
 7. 발행·반영 확인   — frontmatter·라우팅·목업 교체(→ content-handoff.md), 사이트에서 확인.
 ```
 
 - **2와 3의 분담**: 코드가 답하는 건 코드에서(2), 코드가 모르는 판단·맥락은 인터뷰에서(3). 인터뷰 없이 4로 가지 않는다.
-- **5의 게이트**: 루브릭 평균 4점↑ + 어느 항목도 2점 이하 없음. 통과 못 하면 발행하지 않는다.
+- **4.5의 게이트**: 그림 필요/불필요 판정을 건너뛰지 않는다("불필요"도 명시적 출력). 지어낸 그림은 그림 없음만 못하다(§4.6 정직성).
+- **5의 게이트**: 루브릭 평균 4점↑ + 어느 항목도 2점 이하 없음 + `content:check` 그린(R3 포함). 통과 못 하면 발행하지 않는다.
 
 ## 4. 산출물 위치·저장소 규칙 (SSOT)
 
@@ -68,6 +70,7 @@
 | **2 원자료** | §9.1 폼(코드칸) | **jio.dev** `docs/specs/portfolio/raw-material/<slug>.md` | 정상 커밋 | ★**마스킹 필수**(§4.1) |
 | **3 인터뷰** | 위 파일 빈칸 채움 | 〃 같은 파일 | 정상 커밋 | ★마스킹 필수 |
 | **4·6·7 작성·발행** | 5층 골격 MDX | **jio.dev** `content/projects/<slug>.mdx` | 정상 커밋 | **일반화**(공개) |
+| **4.5 다이어그램** | 개념도 SVG | **jio.dev** `public/projects/<slug>-<개념>.svg` | 정상 커밋 | **일반화**(공개 — 스크린샷 금지, 손으로 그린 개념도만) |
 | **3 인터뷰 원문** | 사용자 답변 verbatim | **jio.dev** `docs/specs/portfolio/raw-material/<slug>-interview.md` | 정상 커밋 | ★**마스킹 필수**(§4.1) |
 
 - **모든 산출물 작업은 jio.dev에서** (원자료·인터뷰·작성·발행). 단 jio.dev는 공개 repo라 **마스킹/일반화가 입장 조건**(§4.1). ⚠️ vd-front `docs/pp`는 임시 브랜치라 지속 문서작업 불가 → 글을 거기 쓰지 않는다.
@@ -93,6 +96,7 @@
 
 | 글 | 소스(후보·토픽) | 원자료 | 인터뷰 | 작성 | 발행 |
 |---|---|---|---|---|---|
+| **AI 개발 하네스 (대표작·overview)** | 문진빌더(A)·AI 네이티브 관통 | ☑ | ☑ | ☑ | ☑ |
 | **DnD Sibling-scoped Fractional Rank** | 문진빌더(A)·토픽② | ☑ | ☑ | ☑ | ☑ |
 | DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☑ | ☑ |
 | 후속연결 순환탐지(제품 예측+검증 전략) | 문진빌더(A)·토픽③ | ☑ | ☑ | ☐ | ☐ |
@@ -104,6 +108,8 @@
 
 > 단계 완료 시 ☑로 갱신. 글 추가 시 행 추가.
 > **모바일 미리보기 이식·DTO/nanoId**(토픽⑤)는 독립 글이 아님 — AI 네이티브 관통 테마의 증거로 overview·bullet에 녹인다(raw-material §0 C4·§9.2 결정).
+
+> **2026-07-02 업데이트:** 사용자 지정으로 **AI 개발 하네스(대표작·overview)** 작성·발행 완료(원자료 [`ai-native-harness.md`](./raw-material/ai-native-harness.md) · 3-에이전트 코드정찰+심층인터뷰 · /codex 게이트 2회 · [`content/projects/ai-native-harness.mdx`](../../../content/projects/ai-native-harness.mdx), main 반영). 최종 제목 **"구현자에서 설계자로 — AI 개발 하네스"**, 컨셉은 **B(역할 전환 서사가 척추, 하네스=how)**로 확정(초기 A=하네스-메커니즘-우선에서 전환 — 상세 raw-material §0 상단 B 노트). 이건 "진짜 대표작"으로 예약돼 있던 AI 가속+하네스 서사다(questionnaire-builder-interview 메타). 신규 컴포넌트 [`Pullquote`](../../../src/shared/ui/Pullquote.tsx)(에디토리얼 인용구) 추가·가드레일 허용목록 반영. 아래 air-gap은 **그다음 딥다이브** 후보로 유효.
 
 ### 5.1 ★ 다음 글 1순위 — air-gap 이관·배포 lifecycle (토픽④) [추천·확정 대기]
 

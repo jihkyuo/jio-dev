@@ -20,6 +20,14 @@ describe("profileSchema", () => {
     expect(profileSchema.safeParse(valid).success).toBe(true);
   });
 
+  it("accepts a profile with links.linkedin omitted (optional field)", () => {
+    const ok = profileSchema.safeParse({
+      ...valid,
+      links: { email: valid.links.email, github: valid.links.github },
+    });
+    expect(ok.success).toBe(true);
+  });
+
   it("rejects a resumePdf that is not a root-relative path", () => {
     const bad = profileSchema.safeParse({ ...valid, resumePdf: "resume.pdf" });
     expect(bad.success).toBe(false);

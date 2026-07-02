@@ -30,6 +30,20 @@ describe("experienceSchema", () => {
     expect(bad.success).toBe(false);
   });
 
+  it("accepts an experience with teamSize omitted (optional field)", () => {
+    const ok = experienceSchema.safeParse({
+      company: "에이아이트릭스",
+      role: "프론트엔드 개발자",
+      period: { start: "2024.09", end: "NOW" },
+      // teamSize 생략 — 헤드카운트가 신호가 아닌 경력
+      scope: "의료 AI 제품군 프론트 주도",
+      impact: ["빌드 용량 86% 감소", "서버드리븐 문진 아키텍처"],
+      leadership: [],
+      stack: ["Electron", "React"],
+    });
+    expect(ok.success).toBe(true);
+  });
+
   it("rejects fewer than 2 impacts (valid period)", () => {
     const bad = experienceSchema.safeParse({
       company: "某 핀테크",

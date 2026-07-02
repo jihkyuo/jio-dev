@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProjects } from "@/entities/project";
+import { renderHighlightedText } from "@/shared/ui/renderHighlightedText";
 
 export function Projects() {
   const projects = getProjects();
@@ -14,7 +15,9 @@ export function Projects() {
           <Link key={p.slug} href={`/projects/${p.slug}`} className="block">
             <article className="bg-card border border-line rounded-xl p-5 transition-colors hover:border-accent/50">
               <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-base font-semibold text-head">{p.title}</h3>
+                <h3 className="text-base font-semibold text-head">
+                  {renderHighlightedText(p.title, p.titleHighlight, { highlightClassName: "cs-title-hl" })}
+                </h3>
                 <span className="shrink-0 font-mono text-xs text-muted">
                   {p.period}
                 </span>

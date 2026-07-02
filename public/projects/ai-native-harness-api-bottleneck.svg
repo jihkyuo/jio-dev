@@ -1,0 +1,54 @@
+<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif" role="img" aria-label="전에는 FE가 백엔드 개발자에게 API 명세를 물어 기다렸지만, 후에는 프론트·환자웹·백엔드를 한 작업영역에 묶어 AI가 백엔드 코드를 직접 읽어 DTO를 파악해 명세 대기를 줄였다">
+  <rect x="0.5" y="0.5" width="679" height="339" rx="18" fill="#101216" stroke="#1e222a"/>
+
+  <text x="28" y="40" fill="#7e8593" font-size="12.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">API 명세 확인 경로 · 전 → 후</text>
+
+  <!-- ROW A: 전 (muted) -->
+  <text x="28" y="76" fill="#b7bdc8" font-size="13.5">전 — 명세를 사람에게 물어 기다린다</text>
+
+  <rect x="28" y="90" width="104" height="44" rx="9" fill="#1b1f27" stroke="#2a2f3a"/>
+  <text x="80" y="117" text-anchor="middle" fill="#b7bdc8" font-size="13.5">FE 개발자</text>
+
+  <text x="164" y="106" text-anchor="middle" fill="#7e8593" font-size="10.5">명세 문의</text>
+  <line x1="138" y1="112" x2="188" y2="112" stroke="#7e8593" stroke-width="1.6"/>
+  <path d="M196,112 L188,108 L188,116 Z" fill="#7e8593"/>
+
+  <rect x="200" y="90" width="120" height="44" rx="9" fill="#1b1f27" stroke="#2a2f3a"/>
+  <text x="260" y="117" text-anchor="middle" fill="#b7bdc8" font-size="13.5">백엔드 개발자</text>
+
+  <text x="344" y="106" text-anchor="middle" fill="#7e8593" font-size="10.5">확답</text>
+  <line x1="326" y1="112" x2="376" y2="112" stroke="#7e8593" stroke-width="1.6"/>
+  <path d="M384,112 L376,108 L376,116 Z" fill="#7e8593"/>
+
+  <rect x="388" y="90" width="96" height="44" rx="9" fill="#1b1f27" stroke="#2a2f3a"/>
+  <text x="436" y="117" text-anchor="middle" fill="#b7bdc8" font-size="13.5">구현</text>
+
+  <text x="260" y="154" text-anchor="middle" fill="#7e8593" font-size="11">⏳ 명세 대기</text>
+  <text x="652" y="117" text-anchor="end" fill="#7e8593" font-size="12">사람↔사람 직렬 병목</text>
+
+  <!-- divider -->
+  <line x1="28" y1="184" x2="652" y2="184" stroke="#1e222a" stroke-width="1"/>
+
+  <!-- ROW B: 후 (accent) -->
+  <text x="28" y="220" fill="#b7bdc8" font-size="13.5">후 — AI가 백엔드 코드를 직접 읽는다</text>
+
+  <rect x="28" y="234" width="214" height="56" rx="11" fill="#15181e" stroke="#7e9cd4" stroke-width="1.6"/>
+  <text x="135" y="258" text-anchor="middle" fill="#8fb0ec" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">한 작업영역</text>
+  <text x="135" y="278" text-anchor="middle" fill="#b7bdc8" font-size="12.5">FE · 환자웹 · <tspan fill="#8fb0ec" font-weight="600">백엔드</tspan></text>
+
+  <text x="266" y="250" text-anchor="middle" fill="#8fb0ec" font-size="10.5">직접 read</text>
+  <line x1="286" y1="262" x2="252" y2="262" stroke="#7e9cd4" stroke-width="1.7"/>
+  <path d="M244,262 L252,258 L252,266 Z" fill="#7e9cd4"/>
+
+  <rect x="288" y="240" width="58" height="44" rx="9" fill="#7e9cd4" stroke="#7e9cd4"/>
+  <text x="317" y="267" text-anchor="middle" fill="#101216" font-size="14" font-weight="700">AI</text>
+
+  <text x="392" y="250" text-anchor="middle" fill="#8fb0ec" font-size="10.5">DTO 파악</text>
+  <line x1="348" y1="262" x2="432" y2="262" stroke="#7e9cd4" stroke-width="1.7"/>
+  <path d="M440,262 L432,258 L432,266 Z" fill="#7e9cd4"/>
+
+  <rect x="444" y="240" width="160" height="44" rx="9" fill="#7e9cd4" fill-opacity="0.16" stroke="#7e9cd4" stroke-width="1.6"/>
+  <text x="524" y="267" text-anchor="middle" fill="#8fb0ec" font-size="12">DTO를 코드에서 확인</text>
+
+  <text x="28" y="312" fill="#7e8593" font-size="11">명세 대기를 코드 직접 확인으로 옮겨 왕복을 줄였다</text>
+</svg>

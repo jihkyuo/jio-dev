@@ -5,17 +5,15 @@
 export const siteConfig = {
   name: "지오현",
   // 헤더/OG 카드 등에 쓰이는 한 줄 직함
-  role: "프론트엔드 엔지니어",
+  role: "프론트엔드 개발자",
   // 메타 description (검색 결과·OG 본문)
   description:
-    "프론트엔드 엔지니어 지오현의 포트폴리오. 만든 것들과 연락처를 모았습니다.",
+    "의료 AI·모빌리티 도메인에서 데스크톱 앱·웹·어드민을 주도한 프론트엔드 개발자 지오현의 포트폴리오.",
   // 배포 도메인 (metadataBase·OG 절대경로 기준). 커스텀 도메인 연결 후 그대로 유지.
   url: "https://jio.dev",
-  // 연락처 — 실제 값으로 채워 넣으세요 (플레이스홀더)
   links: {
-    email: "hello@jio.dev",
-    github: "https://github.com/",
-    linkedin: "https://www.linkedin.com/in/",
+    email: "jihkyuoo@naver.com",
+    github: "https://github.com/jihkyuo",
   },
 } as const;
 

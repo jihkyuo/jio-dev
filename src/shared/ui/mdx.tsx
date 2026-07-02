@@ -4,6 +4,7 @@ import { getProjectBySlug } from "@/entities/project";
 import { ArticlePreviewLink } from "@/shared/ui/ArticlePreviewLink";
 import { classifyHref } from "@/shared/lib/classifyHref";
 import { Callout } from "@/shared/ui/Callout";
+import { Pullquote } from "@/shared/ui/Pullquote";
 import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { Hl } from "@/shared/ui/Hl";
 import { References, Reference } from "@/shared/ui/References";
@@ -50,6 +51,7 @@ const AnchorIcon = () => (
 
 export const mdxComponents: Components = {
   Callout,
+  Pullquote,
   Hl,
   References,
   Reference,
@@ -87,6 +89,15 @@ export const mdxComponents: Components = {
       {children}
     </p>
   ),
+  // 개념도/설계도. 마크다운 이미지(![alt](src))가 여기로 온다 — alt를 캡션으로 쓴다.
+  // 캡션이 곧 대체텍스트라 스크린리더 중복을 피하려 img alt는 비운다(figcaption이 설명).
+  img: ({ src, alt }) => (
+    <figure className="my-8">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={typeof src === "string" ? src : ""} alt="" className="mx-auto block w-full rounded-xl border border-line" />
+      {alt && <figcaption className="mt-3 text-center text-sm leading-relaxed text-muted">{alt}</figcaption>}
+    </figure>
+  ),
   ul: ({ children }) => (
     <ul className="mb-4 space-y-2">{children}</ul>
   ),
@@ -114,7 +125,7 @@ export const mdxComponents: Components = {
             href={h}
             className={className}
             icon={<ArticleIcon />}
-            preview={{ title: meta.title, impact: meta.impact, stack: meta.stack, period: meta.period }}
+            preview={{ title: meta.title, titleHighlight: meta.titleHighlight, impact: meta.impact, stack: meta.stack, period: meta.period }}
           >
             {children}
           </ArticlePreviewLink>

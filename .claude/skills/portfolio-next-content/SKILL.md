@@ -24,14 +24,15 @@ description: jio.dev 포트폴리오의 "다음 컨텐츠를 파악·작성·발
 1. 단계 위치 파악 — 그 글의 원자료/인터뷰 ☑ 여부로 어느 단계부터 진입할지 결정.
 2. 코드·git 파악  — (원자료 ☐일 때만) 소스 repo 분석 → raw-material/<slug>.md 코드칸. ★마스킹.
 3. 심층 인터뷰    — (인터뷰 ☐일 때만) → 스킬 `portfolio-deep-interview`로 위임.
-4. 골격대로 작성  — case-study-structure.md 5층 골격으로 content/projects/<slug>.mdx 작성.
-5. 자가검증       — §5 체크리스트 + §9.2 루브릭(평균 4↑, 2점 이하 0) + /codex 교차검증. 미달이면 4로.
+4. 골격대로 작성  — case-study-structure.md 5층 골격으로 content/projects/<slug>.mdx 작성. 지배 메커니즘이 그림감이면 그 자리에 자리표시.
+4.5 다이어그램     — §4.6대로 그림 필요/불필요 **최종 판단**(불필요도 1급 출력, §9.1에 근거). 필요하면 diagram-style.md 하우스 스타일 SVG 제작(public/projects/<slug>-<개념>.svg) → 산문 옆 삽입. **매 글이 판단을 거친다.**
+5. 자가검증       — §5 체크리스트 + §9.2 루브릭(평균 4↑, 2점 이하 0, 그림 항목 포함) + content:check(R3 그림 자산) + /codex 교차검증. 미달이면 4로.
 6. jio.dev 커밋   — 마스킹/일반화 확인 후 정상 커밋.
 7. 발행·반영 확인 — frontmatter·라우팅·목업 교체(→ content-handoff.md) → 사이트 확인.
 ```
 
 - **건너뛰기 규칙:** 원자료·인터뷰가 이미 ☑면 2·3을 스킵하고 **4단계(작성)부터** 진입한다(§5.1이 1순위로 그렇게 지정).
-- **게이트 2개:** ① 인터뷰 없이 4로 가지 않는다. ② 5의 루브릭 미통과면 발행하지 않는다.
+- **게이트 3개:** ① 인터뷰 없이 4로 가지 않는다. ② 4.5의 그림 판정(필요/불필요)을 건너뛰지 않는다. ③ 5의 루브릭 미통과면 발행하지 않는다.
 
 ## 위임 포인터 (각 단계의 정본)
 
@@ -41,7 +42,8 @@ description: jio.dev 포트폴리오의 "다음 컨텐츠를 파악·작성·발
 | 2 코드 정찰·마스킹 | content-migration.md §3·§4.1 |
 | 3 인터뷰 | 스킬 **`portfolio-deep-interview`** |
 | 4 작성(5층 골격) | [`case-study-structure.md`](../../../docs/specs/portfolio/case-study-structure.md) |
-| 5 검증 루브릭 | case-study-structure.md §9.2 + `/codex` |
+| 4.5 다이어그램 | case-study-structure.md §4.6 + [`diagram-style.md`](../../../docs/specs/portfolio/diagram-style.md) |
+| 5 검증 루브릭 | case-study-structure.md §9.2 + content:check(R3) + `/codex` |
 | 7 발행·목업 교체 | [`content-handoff.md`](../../../docs/specs/portfolio/content-handoff.md) |
 
 ## 쓰지 않을 때
