@@ -51,7 +51,7 @@ Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · pnpm.
 - `server-only.ts` — vitest 환경에서 `"server-only"` 패키지 모킹.
 
 ### `content/projects/*.mdx` (저장소 루트)
-프로젝트 상세 본문 + frontmatter. 필수: title·slug·period·role·stack·impact·summary. 선택: teamSize·links·order·featured. `entities/project`가 읽어 검증(필수 누락 시 빌드 throw). `impact`는 홈 카드(`widgets/projects`) 훅 줄, 그리고 상세 페이지 H1 아래 아웃컴 deck(0초 스캐너용 결과 verdict — PAAR R행은 방어가능 디테일, deck는 압축 결론으로 해상도가 갈린다)로 쓰인다. 본문은 `content:check`(=`vitest run src/entities`) 가드레일이 "콘텐츠-not-코드"를 강제한다 — 산문에 코드(`import`/`export`·JSX 식 `={`·`style=`/`className=`·이벤트 핸들러 `on*=`·위험 raw HTML 소문자 태그 `script`/`iframe`/`object`/`embed`/`style`/`link`/`base`/`form`/`meta`·허용목록 밖 대문자 컴포넌트) 금지(허용: `Callout`/`Chip`/`Meta`), MDX 사전 컴파일로 깨진 글을 빌드 전 차단(`src/entities/project/api/content-guardrail.test.ts`). 펜스/인라인 코드는 검사에서 strip돼 코드 인용은 자유.
+프로젝트 상세 본문 + frontmatter. 필수: title·slug·period·role·stack·impact·summary. 선택: teamSize·links·order·featured. `entities/project`가 읽어 검증(필수 누락 시 빌드 throw). `impact`는 홈 카드(`widgets/projects`) 훅 줄, 그리고 상세 페이지 H1 아래 아웃컴 deck(0초 스캐너용 결과 verdict — PAAR R행은 방어가능 디테일, deck는 압축 결론으로 해상도가 갈린다)로 쓰인다. 본문은 `content:check`(=`vitest run src/entities`) 가드레일이 "콘텐츠-not-코드"를 강제한다 — 산문에 코드(`import`/`export`·JSX 식 `={`·`style=`/`className=`·이벤트 핸들러 `on*=`·위험 raw HTML 소문자 태그 `script`/`iframe`/`object`/`embed`/`style`/`link`/`base`/`form`/`meta`·허용목록 밖 대문자 컴포넌트) 금지(허용: `Callout`/`Pullquote`/`Chip`/`Meta`/`References`/`Reference`), MDX 사전 컴파일로 깨진 글을 빌드 전 차단(`src/entities/project/api/content-guardrail.test.ts`). 펜스/인라인 코드는 검사에서 strip돼 코드 인용은 자유.
 
 ## 데이터 흐름
 `content/projects/*.mdx` + `src/entities/*/api/*.ts`(zod 검증)
