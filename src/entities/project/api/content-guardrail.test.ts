@@ -20,7 +20,7 @@ const slugsFromDisk = readdirSync(PROJECTS_DIR)
   .sort();
 
 // 본문의 화이트리스트 컴포넌트. 그 외 대문자 태그는 코드 드리프트로 간주한다.
-const ALLOWED_COMPONENTS = new Set(["Callout", "Chip", "Meta", "References", "Reference"]);
+const ALLOWED_COMPONENTS = new Set(["Callout", "Pullquote", "Chip", "Meta", "References", "Reference"]);
 
 // 위험 raw HTML 태그. 외부 붙여넣기로 새어 들어오면 MDX가 그대로 렌더하므로 명시
 // 차단한다. **소문자만** 매칭한다 — raw HTML 붙여넣기는 소문자고, 대문자 태그는

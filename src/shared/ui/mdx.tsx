@@ -4,6 +4,7 @@ import { getProjectBySlug } from "@/entities/project";
 import { ArticlePreviewLink } from "@/shared/ui/ArticlePreviewLink";
 import { classifyHref } from "@/shared/lib/classifyHref";
 import { Callout } from "@/shared/ui/Callout";
+import { Pullquote } from "@/shared/ui/Pullquote";
 import { CodeBlock } from "@/shared/ui/CodeBlock";
 import { Hl } from "@/shared/ui/Hl";
 import { References, Reference } from "@/shared/ui/References";
@@ -50,6 +51,7 @@ const AnchorIcon = () => (
 
 export const mdxComponents: Components = {
   Callout,
+  Pullquote,
   Hl,
   References,
   Reference,
