@@ -21,7 +21,8 @@ export function Experience() {
               {e.company} — {e.role}
             </h3>
             <p className="mt-0.5 text-sm text-muted">
-              팀 {e.teamSize} · {e.scope}
+              {e.teamSize && `팀 ${e.teamSize} · `}
+              {e.scope}
             </p>
             <ul className="mt-3 space-y-1">
               {e.impact.map((item) => (

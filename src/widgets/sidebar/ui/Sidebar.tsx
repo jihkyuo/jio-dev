@@ -45,14 +45,16 @@ export function Sidebar() {
           >
             GitHub
           </a>
-          <a
-            href={p.links.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="transition-colors hover:text-accent"
-          >
-            LinkedIn
-          </a>
+          {p.links.linkedin && (
+            <a
+              href={p.links.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              LinkedIn
+            </a>
+          )}
           <a
             href={`mailto:${p.links.email}`}
             className="transition-colors hover:text-accent"

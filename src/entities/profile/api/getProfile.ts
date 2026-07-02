@@ -10,11 +10,11 @@ const profile: Profile = profileSchema.parse({
   eyebrow: "Frontend Engineer",
   name: siteConfig.name,
   role: siteConfig.role,
-  tagline: "복잡한 UI를 단순한 시스템으로. 성능과 DX를 함께 끌어올립니다.",
+  tagline: "변경에 강한 구조와 예측 가능한 상태 흐름. 팀이 함께 완주하는 프론트엔드 설계를 지향합니다.",
   snapshot: {
-    years: 8,
-    domains: ["결제·정산", "디자인 시스템"],
-    headline: "대규모 결제 플로우 LCP 4.2s→1.1s · 전환 +12%",
+    years: 5, // 경력 4년 5개월 → "5년차" 표기. 4년차 선호 시 4로.
+    domains: ["의료 AI", "모빌리티"],
+    headline: "의료 AI 3개 제품 라인을 주도한 설계자 — 변경에 강한 구조로 팀 생산성을 끌어올립니다",
   },
   resumePdf: "/resume.pdf",
   links: siteConfig.links,

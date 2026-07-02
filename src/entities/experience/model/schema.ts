@@ -9,7 +9,8 @@ export const experienceSchema = z.object({
   company: z.string().min(1),
   role: z.string().min(1),
   period: z.object({ start: periodMonth, end: periodEnd }),
-  teamSize: z.string().min(1),
+  /** 팀 규모 — 선택(있을 때만 표시). 헤드카운트가 신호가 아닌 경력은 생략한다. */
+  teamSize: z.string().min(1).optional(),
   /** 본인 역할·기여 범위 */
   scope: z.string().min(1),
   /** 핵심 임팩트 불릿 (2개 이상) */

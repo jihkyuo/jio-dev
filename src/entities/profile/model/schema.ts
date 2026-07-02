@@ -20,7 +20,8 @@ export const profileSchema = z.object({
   links: z.object({
     email: z.string().email(),
     github: z.string().url(),
-    linkedin: z.string().url(),
+    /** 선택 — 없으면 링크를 렌더하지 않는다. */
+    linkedin: z.string().url().optional(),
   }),
 });
 
