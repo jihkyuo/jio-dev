@@ -30,8 +30,7 @@ export function Sidebar() {
       <div className="mt-10">
         <a
           href={p.resumePdf}
-          target="_blank"
-          rel="noreferrer"
+          download="프론트엔드 개발자 지오현.pdf"
           className="inline-block rounded border border-accent px-4 py-2 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
         >
           이력서 PDF ↓

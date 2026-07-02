@@ -21,8 +21,7 @@ export function Contact() {
         </a>
         <a
           href={profile.resumePdf}
-          target="_blank"
-          rel="noreferrer"
+          download="프론트엔드 개발자 지오현.pdf"
           className="rounded border border-line px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/50 hover:text-head"
         >
           이력서 PDF ↓
