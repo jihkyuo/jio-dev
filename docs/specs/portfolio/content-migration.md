@@ -96,6 +96,7 @@
 
 | 글 | 소스(후보·토픽) | 원자료 | 인터뷰 | 작성 | 발행 |
 |---|---|---|---|---|---|
+| **AI 개발 하네스 (대표작·overview)** | 문진빌더(A)·AI 네이티브 관통 | ☑ | ☑ | ☑ | ☑ |
 | **DnD Sibling-scoped Fractional Rank** | 문진빌더(A)·토픽② | ☑ | ☑ | ☑ | ☑ |
 | DraftStore 엔진 교체(RHF→Zustand+immer) | 문진빌더(A)·토픽① | ☑ | ☑ | ☑ | ☑ |
 | 후속연결 순환탐지(제품 예측+검증 전략) | 문진빌더(A)·토픽③ | ☑ | ☑ | ☐ | ☐ |
@@ -107,6 +108,8 @@
 
 > 단계 완료 시 ☑로 갱신. 글 추가 시 행 추가.
 > **모바일 미리보기 이식·DTO/nanoId**(토픽⑤)는 독립 글이 아님 — AI 네이티브 관통 테마의 증거로 overview·bullet에 녹인다(raw-material §0 C4·§9.2 결정).
+
+> **2026-07-02 업데이트:** 사용자 지정으로 **AI 개발 하네스(대표작·overview)**를 먼저 작성 완료(원자료 [`ai-native-harness.md`](./raw-material/ai-native-harness.md) · 3-에이전트 코드정찰+심층인터뷰 · /codex 게이트 통과 · [`content/projects/ai-native-harness.mdx`](../../../content/projects/ai-native-harness.mdx), 발행 반영만 남음). 이건 "진짜 대표작"으로 예약돼 있던 AI 가속+하네스 서사다(questionnaire-builder-interview 메타). 아래 air-gap은 **그다음 딥다이브** 후보로 유효.
 
 ### 5.1 ★ 다음 글 1순위 — air-gap 이관·배포 lifecycle (토픽④) [추천·확정 대기]
 
